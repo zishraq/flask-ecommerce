@@ -3,8 +3,7 @@ DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS products;
 
 CREATE TABLE user (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  username TEXT UNIQUE NOT NULL,
+  username TEXT PRIMARY KEY,
   password TEXT NOT NULL
 );
 
@@ -18,8 +17,7 @@ CREATE TABLE post (
 );
 
 CREATE TABLE products (
-    product_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    product_name TEXT NOT NULL,
+    product_name TEXT PRIMARY KEY,
     description TEXT NOT NULL,
     product_category TEXT NOT NULL,
     price FLOAT,

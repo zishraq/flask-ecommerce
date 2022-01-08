@@ -36,9 +36,6 @@ def index():
 @login_required
 def create():
     if request.method == 'POST':
-        # title = request.form['title']
-        # body = request.form['body']
-
         title = request.get_json()['title']
         body = request.get_json()['body']
 
@@ -58,7 +55,7 @@ def create():
             db.execute(
                 'INSERT INTO post (title, body, author_id)'
                 ' VALUES (?, ?, ?)',
-                (title, body, g.user['id'])
+                (title, body, g.user['username'])
             )
             db.commit()
             # return redirect(url_for('blog.index'))
