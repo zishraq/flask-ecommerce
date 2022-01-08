@@ -8,49 +8,51 @@ from flaskr.db import get_db
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
-@bp.route('/register', methods=('GET', 'POST'))
+@bp.route('/register', methods=['POST'])
 def register():
-    if request.method == 'POST':
-        # username = request.form['username']
-        # password = request.form['password']
+    # username = request.form['username']
+    # password = request.form['password']
 
-        username = request.get_json()['username']
-        password = request.get_json()['password']
+    body = dict(request.get_json())
+    error = None
 
-        db = get_db()
-        error = None
+    print(body)
 
-        if not username:
-            error = 'Username is required.'
-        elif not password:
-            error = 'Password is required.'
-
-        if error is None:
-            try:
-                db.execute(
-                    'INSERT INTO user (username, password) VALUES (?, ?)',
-                    (username, generate_password_hash(password)),
-                )
-                db.commit()
-            except db.IntegrityError:
-                error = f'User {username} is already registered.'
-            else:
-                # return redirect(url_for("auth.login"))
-                return {
-                    'isSuccess': True,
-                    'message': 'Successfully registered'
-                }
-
-        # flash(error)
+    if 'username' or 'password' not in body:
+        error = 'Username or password missing'
         return {
             'isSuccess': False,
             'message': error
         }
 
-    # return render_template('auth/register.html')
+    username = body['username']
+    password = body['password']
+
+    db = get_db()
+
+    if not username:
+        error = 'Username is required.'
+    elif not password:
+        error = 'Password is required.'
+
+    if error is None:
+        try:
+            db.execute(
+                'INSERT INTO user (username, password) VALUES (?, ?)',
+                (username, generate_password_hash(password)),
+            )
+            db.commit()
+        except db.IntegrityError:
+            error = f'User {username} is already registered.'
+        else:
+            # return redirect(url_for("auth.login"))
+            return {
+                'isSuccess': True,
+                'message': 'Successfully registered'
+            }
     return {
-        'isSuccess': True,
-        'message': 'Successfully registered'
+        'isSuccess': False,
+        'message': error
     }
 
 
