@@ -36,15 +36,23 @@ def index():
 @login_required
 def create():
     if request.method == 'POST':
-        title = request.form['title']
-        body = request.form['body']
+        # title = request.form['title']
+        # body = request.form['body']
+
+        title = request.get_json()['title']
+        body = request.get_json()['body']
+
         error = None
 
         if not title:
             error = 'Title is required.'
 
         if error is not None:
-            flash(error)
+            # flash(error)
+            return {
+                'isSuccess': False,
+                'message': error
+            }
         else:
             db = get_db()
             db.execute(
@@ -53,9 +61,14 @@ def create():
                 (title, body, g.user['id'])
             )
             db.commit()
-            return redirect(url_for('blog.index'))
+            # return redirect(url_for('blog.index'))
+            return {
+                'isSuccess': True,
+                'message': 'Blog created'
+            }
 
-    return render_template('blog/create.html')
+    # return render_template('blog/create.html')
+    # return render_template('blog/create.html')
 
 
 def get_post(id, check_author=True):

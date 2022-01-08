@@ -10,15 +10,13 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 @bp.route('/register', methods=['POST'])
 def register():
-    # username = request.form['username']
-    # password = request.form['password']
-
     body = dict(request.get_json())
     error = None
 
     print(body)
 
-    if 'username' or 'password' not in body:
+    if 'username' not in body or 'password' not in body:
+        print('here')
         error = 'Username or password missing'
         return {
             'isSuccess': False,
@@ -56,30 +54,43 @@ def register():
     }
 
 
-@bp.route('/login', methods=('GET', 'POST'))
+@bp.route('/login', methods=['POST'])
 def login():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        db = get_db()
-        error = None
-        user = db.execute(
-            'SELECT * FROM user WHERE username = ?', (username,)
-        ).fetchone()
+    # if request.method == 'POST':
+    # username = request.form['username']
+    # password = request.form['password']
 
-        if user is None:
-            error = 'Incorrect username.'
-        elif not check_password_hash(user['password'], password):
-            error = 'Incorrect password.'
+    username = request.get_json()['username']
+    password = request.get_json()['password']
 
-        if error is None:
-            session.clear()
-            session['user_id'] = user['id']
-            return redirect(url_for('index'))
+    db = get_db()
+    error = None
+    user = db.execute(
+        'SELECT * FROM user WHERE username = ?', (username,)
+    ).fetchone()
 
-        flash(error)
+    if user is None:
+        error = 'Incorrect username.'
+    elif not check_password_hash(user['password'], password):
+        error = 'Incorrect password.'
 
-    return render_template('auth/login.html')
+    if error is None:
+        session.clear()
+        session['user_id'] = user['id']
+        # return redirect(url_for('index'))
+        return {
+            'isSuccess': True,
+            'message': 'Successfully logged in'
+        }
+
+    return {
+        'isSuccess': False,
+        'error': error
+    }
+        # flash(error)
+
+    # return render_template('auth/login.html')
+    # return render_template('auth/login.html')
 
 
 @bp.before_app_request
