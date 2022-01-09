@@ -26,7 +26,9 @@ CREATE TABLE products (
     price FLOAT,
     discount FLOAT ,
     created_at TIMESTAMP,
+    created_by TEXT,
     updated_at TIMESTAMP,
+    updated_by TEXT,
     in_stock INTEGER,
     total_sold INTEGER
 );

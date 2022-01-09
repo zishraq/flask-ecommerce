@@ -20,14 +20,14 @@ def add_product():
 
     body = dict(request.get_json())
     body['created_at'] = datetime.now()
-    body['updated_at'] = datetime.now()
+    body['created_by'] = g.user['username']
     body['total_sold'] = 0
 
     db = get_db()
 
     try:
         db.execute(
-            f'INSERT INTO products (product_name, description, product_category, price, discount, created_at, updated_at, in_stock, total_sold) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            f'INSERT INTO products (product_name, description, product_category, price, discount, created_at, created_by, in_stock, total_sold) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
             (
                 body['product_name'],
                 body['description'],
@@ -35,7 +35,7 @@ def add_product():
                 body['price'],
                 body['discount'],
                 body['created_at'],
-                body['updated_at'],
+                body['created_by'],
                 body['in_stock'],
                 body['total_sold']
             ),
@@ -46,7 +46,6 @@ def add_product():
         return response
 
     body['created_at'] = str(body['created_at'])
-    body['updated_at'] = str(body['updated_at'])
     response['isSuccess'] = True
     response['product_deatils'] = body
     return response

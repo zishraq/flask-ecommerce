@@ -10,7 +10,7 @@ from flaskr.db import get_db
 bp = Blueprint('shopping_cart', __name__)
 
 
-@bp.route('/create_shopping_cart', methods=["POST", "GET"])
+@bp.route('/create-shopping-cart', methods=["POST"])
 @login_required
 def create_shopping_cart():
     response = {
@@ -42,7 +42,7 @@ def create_shopping_cart():
     return response
 
 
-@bp.route('/<cart_id>/add_to_cart', methods=['PUT'])
+@bp.route('/add-to-cart/<cart_id>', methods=['PUT'])
 @login_required
 def add_to_cart(cart_id):
     response = {
@@ -70,7 +70,7 @@ def add_to_cart(cart_id):
     return response
 
 
-@bp.route('/get_all_carts', methods=['GET'])
+@bp.route('/get-all-carts', methods=['GET'])
 def get_all_carts():
     db = get_db()
     carts = db.execute(
