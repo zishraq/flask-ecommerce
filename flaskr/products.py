@@ -10,10 +10,14 @@ bp = Blueprint('products', __name__)
 
 
 @bp.route('/add_product', methods=['POST'])
+@login_required
 def add_product():
-    # print(dir(request))
-    print(request.authorization)
-    print(request)
+    response = {
+        'isSuccess': False,
+        'error': None,
+        'operation': 'Add product'
+    }
+
     body = dict(request.get_json())
     body['created_at'] = datetime.now()
     body['updated_at'] = datetime.now()
@@ -38,13 +42,14 @@ def add_product():
         )
         db.commit()
     except db.IntegrityError:
-        error = f'User {body["product_name"]} is already exists.'
-    else:
-        # return redirect(url_for("auth.login"))
-        return {
-            'isSuccess': True,
-            'message': 'Successfully entered'
-        }
+        response['error'] = f'Product {body["product_name"]} already exists.'
+        return response
+
+    body['created_at'] = str(body['created_at'])
+    body['updated_at'] = str(body['updated_at'])
+    response['isSuccess'] = True
+    response['product_deatils'] = body
+    return response
 
 
 @bp.route('/all-products', methods=['GET'])

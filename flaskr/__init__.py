@@ -38,6 +38,9 @@ def create_app(test_config=None):
     from . import products
     app.register_blueprint(products.bp)
 
+    from . import shopping_cart
+    app.register_blueprint(shopping_cart.bp)
+
     from . import blog
     app.register_blueprint(blog.bp)
     app.add_url_rule('/', endpoint='index')
