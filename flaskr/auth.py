@@ -56,10 +56,6 @@ def register():
 
 @bp.route('/login', methods=['POST'])
 def login():
-    # if request.method == 'POST':
-    # username = request.form['username']
-    # password = request.form['password']
-
     username = request.get_json()['username']
     password = request.get_json()['password']
 
@@ -87,10 +83,6 @@ def login():
         'isSuccess': False,
         'error': error
     }
-        # flash(error)
-
-    # return render_template('auth/login.html')
-    # return render_template('auth/login.html')
 
 
 @bp.before_app_request
