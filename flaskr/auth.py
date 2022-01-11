@@ -8,81 +8,94 @@ from flaskr.db import get_db
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
 
+class EcommerceFactory(object):
+    __permissions__ = {
+        'moderator': ['create_product', 'update_product', 'delete_product'],
+        'customer': ['customer']
+    }
+
+
 @bp.route('/register', methods=['POST'])
 def register():
-    body = dict(request.get_json())
-    error = None
+    response = {
+        'isSuccess': False,
+        'operation': 'Register'
+    }
 
-    print(body)
+    body = dict(request.get_json())
 
     if 'username' not in body or 'password' not in body:
-        print('here')
-        error = 'Username or password missing'
-        return {
-            'isSuccess': False,
-            'message': error
-        }
+        response['error'] = 'Username or password missing'
+        return response
+
+    username = body['username']
+    password = body['password']
+
+    role = body['role']
+
+    db = get_db()
+
+    if not username:
+        response['error'] = 'Username is required.'
+        return response
+
+    elif not password:
+        response['error'] = 'Password is required.'
+        return response
+
+    try:
+        # db.execute(
+        #     'INSERT INTO user (username, password) VALUES (?, ?)',
+        #     (username, generate_password_hash(password)),
+        # )
+
+        db.execute(
+            'INSERT INTO user (username, password, role) VALUES (?, ?, ?)',
+            (username, generate_password_hash(password), role),
+        )
+
+        db.commit()
+    except db.IntegrityError:
+        response['error'] = f'User {username} is already registered.'
+        return response
+
+    response['isSuccess'] = True
+    return response
+
+
+@bp.route('/login', methods=['POST'])
+def login():
+    response = {
+        'isSuccess': False,
+        'operation': 'Log In'
+    }
+
+    body = dict(request.get_json())
+
+    if 'username' not in body or 'password' not in body:
+        response['error'] = 'Username or password missing'
+        return response
 
     username = body['username']
     password = body['password']
 
     db = get_db()
-
-    if not username:
-        error = 'Username is required.'
-    elif not password:
-        error = 'Password is required.'
-
-    if error is None:
-        try:
-            db.execute(
-                'INSERT INTO user (username, password) VALUES (?, ?)',
-                (username, generate_password_hash(password)),
-            )
-            db.commit()
-        except db.IntegrityError:
-            error = f'User {username} is already registered.'
-        else:
-            # return redirect(url_for("auth.login"))
-            return {
-                'isSuccess': True,
-                'message': 'Successfully registered'
-            }
-    return {
-        'isSuccess': False,
-        'message': error
-    }
-
-
-@bp.route('/login', methods=['POST'])
-def login():
-    username = request.get_json()['username']
-    password = request.get_json()['password']
-
-    db = get_db()
-    error = None
     user = db.execute(
         'SELECT * FROM user WHERE username = ?', (username,)
     ).fetchone()
 
     if user is None:
-        error = 'Incorrect username.'
+        response['error'] = 'Incorrect username.'
+        return response
+
     elif not check_password_hash(user['password'], password):
-        error = 'Incorrect password.'
+        response['error'] = 'Incorrect password.'
+        return response
 
-    if error is None:
-        session.clear()
-        session['username'] = user['username']
-        # return redirect(url_for('index'))
-        return {
-            'isSuccess': True,
-            'message': 'Successfully logged in'
-        }
-
-    return {
-        'isSuccess': False,
-        'error': error
-    }
+    session.clear()
+    session['username'] = user['username']
+    response['isSuccess'] = True
+    return response
 
 
 @bp.before_app_request
@@ -100,14 +113,34 @@ def load_logged_in_user():
 @bp.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('index'))
+    return {
+        'isSuccess': True,
+        'operation': 'Successfully logged out'
+    }
 
 
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user is None:
-            return redirect(url_for('auth.login'))
+            return {
+                'isSuccess': True,
+                'message': 'No session'
+            }
+
+        return view(**kwargs)
+
+    return wrapped_view
+
+
+def authorize_add_product(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user['role'] != 'admin':
+            return {
+                'isSuccess': True,
+                'message': 'Unauthorized'
+            }
 
         return view(**kwargs)
 

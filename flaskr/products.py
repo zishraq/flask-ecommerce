@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Blueprint, flash, g, redirect, render_template, request, url_for, jsonify
 from werkzeug.exceptions import abort
 
-from flaskr.auth import login_required
+from flaskr.auth import login_required, authorize_add_product
 from flaskr.db import get_db
 
 bp = Blueprint('products', __name__)
@@ -11,6 +11,7 @@ bp = Blueprint('products', __name__)
 
 @bp.route('/add_product', methods=['POST'])
 @login_required
+@authorize_add_product
 def add_product():
     response = {
         'isSuccess': False,
