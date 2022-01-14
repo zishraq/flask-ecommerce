@@ -8,11 +8,11 @@ DROP TABLE IF EXISTS shipping;
 CREATE TABLE user (
   username TEXT PRIMARY KEY,
   password TEXT NOT NULL,
-  name TEXT;
-  email TEXT;
-  phone TEXT;
-  role TEXT;
-  joined_at TIMESTAMP;
+  name TEXT,
+  email TEXT,
+  phone TEXT,
+  role TEXT,
+  joined_at TIMESTAMP
 );
 
 CREATE TABLE post (

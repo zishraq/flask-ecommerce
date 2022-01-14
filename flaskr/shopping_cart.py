@@ -7,7 +7,7 @@ from werkzeug.exceptions import abort
 from flaskr.auth import login_required
 from flaskr.db import get_db
 
-bp = Blueprint('shopping_cart', __name__)
+bp = Blueprint('shopping_cart', __name__, url_prefix='/shopping-cart')
 
 
 @bp.route('/create-shopping-cart', methods=["POST"])
