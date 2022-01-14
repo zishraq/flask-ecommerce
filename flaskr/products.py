@@ -50,7 +50,6 @@ def add_product():
                 response['message'] = f'Product {product["product_name"]} already exists.'
                 pass
 
-            product['created_at'] = str(product['created_at'])
         response['total_inserted_products'] = len(body['products'])
         response['inserted_products'] = body['products']
 
@@ -77,7 +76,6 @@ def add_product():
             response['error'] = f'Product {body["product_name"]} already exists.'
             return response
 
-        body['created_at'] = str(body['created_at'])
         response['inserted_products'] = body
 
     response['isSuccess'] = True
