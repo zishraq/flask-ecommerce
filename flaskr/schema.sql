@@ -36,6 +36,7 @@ CREATE TABLE shopping_cart (
     quantity INTEGER,
     username TEXT,
     created_at TIMESTAMP,
+    updated_at TIMESTAMP,
     PRIMARY KEY(cart_id, product_id),
     FOREIGN KEY (username) REFERENCES user(username),
     FOREIGN KEY (product_id) REFERENCES products(product_id)
