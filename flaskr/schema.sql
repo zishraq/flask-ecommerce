@@ -16,7 +16,8 @@ CREATE TABLE user (
 );
 
 CREATE TABLE products (
-    product_name TEXT PRIMARY KEY,
+    product_id TEXT PRIMARY KEY,
+    product_name TEXT,
     description TEXT NOT NULL,
     product_category TEXT NOT NULL,
     price FLOAT,
@@ -30,13 +31,14 @@ CREATE TABLE products (
 );
 
 CREATE TABLE shopping_cart (
-    cart_id TEXT PRIMARY KEY,
+    cart_id TEXT,
+    product_id TEXT,
     quantity INTEGER,
     username TEXT,
-    product_name TEXT,
     created_at TIMESTAMP,
-    FOREIGN KEY (username) REFERENCES user(username)
-    FOREIGN KEY (product_name) REFERENCES products(product_name)
+    PRIMARY KEY(cart_id, product_id),
+    FOREIGN KEY (username) REFERENCES user(username),
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 
 CREATE TABLE orders (
@@ -49,11 +51,10 @@ CREATE TABLE orders (
 );
 
 CREATE TABLE shipping (
-    shipping_id TEXT PRIMARY KEY,
+    shipping_id TEXT,
+    order_id TEXT,
     address TEXT,
     date_shipped TIMESTAMP,
-    order_id TEXT,
-    cart_id TEXT,
+    PRIMARY KEY(shipping_id, order_id),
     FOREIGN KEY (order_id) REFERENCES orders(order_id)
-    FOREIGN KEY (cart_id) REFERENCES orders(cart_id)
 );

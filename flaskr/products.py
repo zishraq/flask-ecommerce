@@ -1,3 +1,4 @@
+import uuid
 from datetime import datetime
 
 from flask import Blueprint, flash, g, redirect, render_template, request, url_for, jsonify
@@ -29,11 +30,13 @@ def add_product():
     if "products" in body:
         for product in body['products']:
             product.update(creation_data)
+            product['product_id'] = str(uuid.uuid4())
 
             try:
                 db.execute(
-                    f'INSERT INTO products (product_name, description, product_category, price, discount, created_at, created_by, in_stock, total_sold) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                    f'INSERT INTO products (product_id, product_name, description, product_category, price, discount, created_at, created_by, in_stock, total_sold) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
                     (
+                        product['product_id'],
                         product['product_name'],
                         product['description'],
                         product['product_category'],
@@ -55,11 +58,13 @@ def add_product():
 
     else:
         body.update(creation_data)
+        body['product_id'] = str(uuid.uuid4())
 
         try:
             db.execute(
-                f'INSERT INTO products (product_name, description, product_category, price, discount, created_at, created_by, in_stock, total_sold) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                f'INSERT INTO products (product_id, product_name, description, product_category, price, discount, created_at, created_by, in_stock, total_sold) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
                 (
+                    body['product_id'],
                     body['product_name'],
                     body['description'],
                     body['product_category'],

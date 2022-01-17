@@ -21,6 +21,59 @@ def create_shopping_cart():
     cart_id = str(uuid.uuid4())
     username = g.user['username']
 
+    products = request.get_json()['products']
+    created_at = datetime.now()
+
+    db = get_db()
+
+    for product in products:
+        try:
+            db.execute(
+                f'INSERT INTO shopping_cart(cart_id, product_id, quantity, username, created_at) VALUES (?, ?, ?, ?, ?)',
+                (
+                    cart_id,
+                    product['product_id'],
+                    product['quantity'],
+                    username,
+                    created_at
+                )
+            )
+            db.commit()
+        except db.IntegrityError:
+            response['error'] = f'{cart_id} already exists.'
+            return response
+
+    response['isSuccess'] = True
+    response['cart_id'] = cart_id
+    return response
+
+
+@bp.route('/add-to-cart/<cart_id>', methods=['PUT'])
+@login_required
+def add_to_cart(cart_id):
+    response = {
+        'isSuccess': False,
+        'operation': 'Add to shopping cart'
+    }
+
+    product_name = request.get_json()['product_name']
+    quantity = request.get_json()['quantity']
+    username = g.user['username']
+
+    if not product_name:
+        response['error'] = 'Product name is required.'
+        return response
+
+    else:
+        db = get_db()
+        db.execute(
+            'UPDATE shopping_cart SET product_name = ?, quantity = ?'
+            ' WHERE cart_id = ?',
+            (product_name, quantity, cart_id)
+        )
+        db.commit()
+        response['isSuccess'] = True
+
     db = get_db()
 
     try:
@@ -42,39 +95,31 @@ def create_shopping_cart():
     return response
 
 
-@bp.route('/add-to-cart/<cart_id>', methods=['PUT'])
-@login_required
-def add_to_cart(cart_id):
-    response = {
-        'isSuccess': False,
-        'operation': 'Add to shopping cart'
-    }
-
-    product_name = request.get_json()['product_name']
-    quantity = request.get_json()['quantity']
-
-    if not product_name:
-        response['error'] = 'Product name is required.'
-        return response
-
-    else:
-        db = get_db()
-        db.execute(
-            'UPDATE shopping_cart SET product_name = ?, quantity = ?'
-            ' WHERE cart_id = ?',
-            (product_name, quantity, cart_id)
-        )
-        db.commit()
-        response['isSuccess'] = True
-
-    return response
-
-
 @bp.route('/get-all-carts', methods=['GET'])
 def get_all_carts():
     db = get_db()
     carts = db.execute(
-        'SELECT *'
+        'SELECT cart_id'
+        ' FROM shopping_cart'
+        ' ORDER BY created_at ASC'
+    ).fetchall()
+
+    results = []
+
+    for i in carts:
+        results.append(dict(i))
+
+    return {
+        'isSuccess': True,
+        'posts': results
+    }
+
+
+@bp.route('/get-products-by-cart-id', methods=['GET'])
+def get_all_carts():
+    db = get_db()
+    carts = db.execute(
+        'SELECT cart_id'
         ' FROM shopping_cart'
         ' ORDER BY created_at ASC'
     ).fetchall()
