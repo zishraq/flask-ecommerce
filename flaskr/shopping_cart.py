@@ -99,7 +99,7 @@ def add_to_cart(cart_id):
 def get_all_carts():
     db = get_db()
     carts = db.execute(
-        'SELECT cart_id'
+        'SELECT DISTINCT cart_id'
         ' FROM shopping_cart'
         ' ORDER BY created_at ASC'
     ).fetchall()
@@ -115,21 +115,47 @@ def get_all_carts():
     }
 
 
-@bp.route('/get-products-by-cart-id', methods=['GET'])
-def get_all_carts():
+@bp.route('/get-products-by-cart-id/<cart_id>', methods=['GET'])
+def get_products_by_cart_id(cart_id):
+    response = {
+        'isSuccess': False,
+        'operation': 'Get products by cart id'
+    }
+
     db = get_db()
-    carts = db.execute(
-        'SELECT cart_id'
-        ' FROM shopping_cart'
-        ' ORDER BY created_at ASC'
+
+    products = db.execute(
+        'SELECT s.product_id, p.product_name, s.quantity, s.username, s.created_at FROM shopping_cart AS s '
+        'JOIN products AS p '
+        'ON s.product_id = p.product_id '
+        'WHERE s.cart_id = ?'
+        'ORDER BY s.created_at ASC',
+        (cart_id,)
     ).fetchall()
 
+    if not len(products):
+        response['error'] = 'No such cart found'
+        return response
+
     results = []
+    username = None
+    created_at = None
 
-    for i in carts:
-        results.append(dict(i))
+    for i in products:
+        formatted_data = dict(i)
+        if not username:
+            username = formatted_data['username']
 
-    return {
-        'isSuccess': True,
-        'posts': results
-    }
+        if not created_at:
+            username = formatted_data['created_at']
+
+        formatted_data.pop('username')
+        formatted_data.pop('created_at')
+        results.append(formatted_data)
+
+    response['isSuccess'] = True
+    response['cart_id'] = cart_id
+    response['username'] = username
+    response['created_at'] = created_at
+    response['products'] = results
+    return response
