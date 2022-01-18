@@ -99,7 +99,7 @@ def delete_product(product_id):
     db = get_db()
 
     db.execute(
-        'DELETE FROM shopping_cart '
+        'DELETE FROM products_by_cart '
         'WHERE product_id = ?',
         (product_id,)
     )
@@ -185,7 +185,8 @@ def update_product(product_id):
 def all_products():
     db = get_db()
     products = db.execute(
-        'SELECT * FROM products ORDER BY created_at DESC'
+        'SELECT * FROM products '
+        'ORDER BY total_sold DESC'
     ).fetchall()
 
     results = []

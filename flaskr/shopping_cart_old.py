@@ -26,21 +26,6 @@ def create_shopping_cart():
 
     db = get_db()
 
-    try:
-        db.execute(
-            f'INSERT INTO shopping_cart_info(cart_id, username, created_at) VALUES (?, ?, ?)',
-            (
-                cart_id,
-                username,
-                created_at
-            )
-        )
-        db.commit()
-
-    except db.IntegrityError:
-        response['error'] = f'Product with id "{cart_id}" already exists.'
-        return response
-
     for product in added_products:
         check_product = db.execute(
             'SELECT * FROM products '
@@ -61,11 +46,12 @@ def create_shopping_cart():
 
         try:
             db.execute(
-                f'INSERT INTO products_by_cart(cart_id, product_id, quantity, added_at) VALUES (?, ?, ?, ?)',
+                f'INSERT INTO shopping_cart(cart_id, product_id, quantity, username, created_at) VALUES (?, ?, ?, ?, ?)',
                 (
                     cart_id,
                     product['product_id'],
                     product['quantity'],
+                    username,
                     created_at
                 )
             )
@@ -90,7 +76,7 @@ def add_to_cart(cart_id):
     db = get_db()
 
     check_cart = db.execute(
-        'SELECT distinct cart_id FROM shopping_cart_info '
+        'SELECT distinct cart_id FROM shopping_cart '
         'WHERE cart_id = ?',
         (cart_id,)
     ).fetchall()
@@ -100,11 +86,6 @@ def add_to_cart(cart_id):
         return response
 
     username = g.user['username']
-
-    if check_cart[0]['username'] != username:
-        response['error'] = 'Unauthorized'
-        return response
-
     added_products = request.get_json()['products']
     updated_at = datetime.now()
 
@@ -121,7 +102,7 @@ def add_to_cart(cart_id):
             return response
 
         previous_status = db.execute(
-            'SELECT * FROM products_by_cart '
+            'SELECT * FROM shopping_cart '
             'WHERE cart_id = ? AND product_id = ? ',
             (cart_id, product['product_id'],)
         ).fetchall()
@@ -137,25 +118,27 @@ def add_to_cart(cart_id):
 
         try:
             db.execute(
-                f'INSERT INTO products_by_cart(cart_id, product_id, quantity, added_at) VALUES (?, ?, ?, ?)',
+                f'INSERT INTO shopping_cart(cart_id, product_id, quantity, username, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)',
                 (
                     cart_id,
                     product['product_id'],
                     product['quantity'],
+                    username,
+                    updated_at,
                     updated_at
                 )
             )
             db.commit()
         except db.IntegrityError:
             db.execute(
-                'UPDATE products_by_cart SET quantity = ?, updated_at = ? '
+                'UPDATE shopping_cart SET quantity = ? '
                 'WHERE cart_id = ? AND product_id = ?',
-                (product['quantity'], updated_at, cart_id, product['product_id'])
+                (product['quantity'], cart_id, product['product_id'])
             )
             db.commit()
 
     db.execute(
-        'UPDATE shopping_cart_info SET updated_at = ? '
+        'UPDATE shopping_cart SET updated_at = ? '
         'WHERE cart_id = ?',
         (updated_at, cart_id)
     )
@@ -169,14 +152,10 @@ def add_to_cart(cart_id):
 @login_required
 def get_all_carts():
     db = get_db()
-    username = g.user['username']
-
     carts = db.execute(
         'SELECT DISTINCT cart_id, created_at, updated_at '
-        'FROM shopping_cart_info '
-        'WHERE username = ? '
-        'ORDER BY created_at ASC',
-        (username,)
+        'FROM shopping_cart '
+        'ORDER BY created_at ASC'
     ).fetchall()
 
     results = []
@@ -201,15 +180,13 @@ def get_products_by_cart_id(cart_id):
     db = get_db()
 
     products = db.execute(
-        'SELECT ps.product_id, p.product_name, ps.quantity, si.username, si.created_at, si.updated_at, SUM(p.price * ps.quantity) AS product_total_price '
-        'FROM products_by_cart AS ps '
-        'JOIN products AS p '
-        'ON ps.product_id = p.product_id '
-        'JOIN shopping_cart_info AS si '
-        'ON si.cart_id = ps.cart_id '
-        'WHERE ps.cart_id = ? '
-        'GROUP BY ps.product_id '
-        'ORDER BY si.created_at ASC ',
+        'SELECT s.product_id, p.product_name, s.quantity, s.username, s.created_at, s.updated_at, SUM(p.price * s.quantity) AS product_total_price '
+        'FROM shopping_cart AS s '
+        'INNER JOIN products AS p '
+        'ON s.product_id = p.product_id '
+        'WHERE s.cart_id = ? '
+        'GROUP BY s.product_id '
+        'ORDER BY s.created_at ASC ',
         (cart_id,)
     ).fetchall()
 
@@ -225,7 +202,6 @@ def get_products_by_cart_id(cart_id):
 
     for i in products:
         formatted_data = dict(i)
-
         if not username:
             username = formatted_data['username']
 

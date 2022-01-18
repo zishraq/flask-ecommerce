@@ -2,11 +2,7 @@ DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS shopping_cart;
-DROP TABLE IF EXISTS products_by_cart;
-DROP TABLE IF EXISTS shopping_cart_info;
 DROP TABLE IF EXISTS orders;
-DROP TABLE IF EXISTS order_info;
-DROP TABLE IF EXISTS carts_by_orders;
 DROP TABLE IF EXISTS shipping;
 
 CREATE TABLE user (
@@ -22,8 +18,8 @@ CREATE TABLE user (
 CREATE TABLE products (
     product_id TEXT PRIMARY KEY,
     product_name TEXT,
-    description TEXT,
-    product_category TEXT,
+    description TEXT NOT NULL,
+    product_category TEXT NOT NULL,
     price FLOAT,
     discount FLOAT ,
     created_at TIMESTAMP,
@@ -34,41 +30,26 @@ CREATE TABLE products (
     total_sold INTEGER
 );
 
-CREATE TABLE shopping_cart_info (
-    cart_id TEXT,
-    username TEXT,
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP,
-    PRIMARY KEY(cart_id),
-    FOREIGN KEY (username) REFERENCES user(username)
-);
-
-CREATE TABLE products_by_cart (
+CREATE TABLE shopping_cart (
     cart_id TEXT,
     product_id TEXT,
     quantity INTEGER,
-    added_at TIMESTAMP,
+    username TEXT,
+    created_at TIMESTAMP,
     updated_at TIMESTAMP,
     PRIMARY KEY(cart_id, product_id),
-    FOREIGN KEY (cart_id) REFERENCES shopping_cart_info(cart_id),
+    FOREIGN KEY (username) REFERENCES user(username),
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
 
-CREATE TABLE order_info (
-    order_id TEXT,
-    created_at TIMESTAMP,
-    updated_at TIMESTAMP,
-    is_confirmed INTEGER,
-    PRIMARY KEY(order_id)
-);
-
-CREATE TABLE carts_by_orders (
+CREATE TABLE orders (
     order_id TEXT,
     cart_id TEXT,
-    added_at TIMESTAMP,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP,
+    order_confirm INTEGER,
     PRIMARY KEY(order_id, cart_id),
-    FOREIGN KEY (order_id) REFERENCES order_info(order_id),
-    FOREIGN KEY (cart_id) REFERENCES shopping_cart_info(cart_id)
+    FOREIGN KEY (cart_id) REFERENCES shopping_cart(cart_id)
 );
 
 CREATE TABLE shipping (
@@ -77,5 +58,5 @@ CREATE TABLE shipping (
     address TEXT,
     date_shipped TIMESTAMP,
     PRIMARY KEY(shipping_id, order_id),
-    FOREIGN KEY (order_id) REFERENCES order_info(order_id)
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
 );
