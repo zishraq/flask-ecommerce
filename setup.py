@@ -10,6 +10,7 @@ setup(
         'flask',
         'faker',
         'elasticsearch',
-        'elasticsearch_dsl'
+        'elasticsearch_dsl',
+        'gunicorn'
     ],
 )

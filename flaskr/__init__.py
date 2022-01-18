@@ -4,6 +4,8 @@ from flask import Flask
 from flask.json import JSONEncoder
 from datetime import date
 
+import flaskr
+
 
 class CustomJSONEncoder(JSONEncoder):
     def default(self, obj):
@@ -39,9 +41,9 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route('/hello')
-    def hello():
-        return 'Hello, World!'
+    @app.route('/index')
+    def index():
+        return 'Welcome to our Online Shop!'
 
     from flaskr import db
     db.init_app(app)
@@ -60,3 +62,7 @@ def create_app(test_config=None):
     app.add_url_rule('/', endpoint='index')
 
     return app
+
+
+if __name__ == '__main__':
+    flaskr.create_app().run(debug=True)

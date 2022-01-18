@@ -172,7 +172,7 @@ def confirm_order(order_id):
         'FROM orders AS o '
         'JOIN products_by_cart AS ps '
         'ON o.cart_id = s.cart_id '
-        'JOIN products AS p '
+        'JOIN products AS p ' 
         'ON p.product_id = s.product_id '
         'GROUP BY p.product_id'
     ).fetchall()
@@ -217,15 +217,44 @@ def get_all_orders():
 
     db = get_db()
     carts = db.execute(
-        'SELECT DISTINCT oi.order_id, co.cart_id, oi.is_confirmed, oi.created_at, oi.updated_at '
+        'SELECT DISTINCT oi.order_id, oi.is_confirmed, oi.created_at, oi.updated_at '
         'FROM order_info AS oi '
         'JOIN carts_by_orders AS co '
         'ON co.order_id = oi.order_id '
         'JOIN shopping_cart_info AS si '
         'ON si.cart_id = co.cart_id '
         'WHERE si.username = ? '
-        'ORDER BY created_at ASC',
+        'ORDER BY oi.created_at ASC',
         (username,)
+    ).fetchall()
+
+    results = []
+
+    for i in carts:
+        results.append(dict(i))
+
+    return {
+        'isSuccess': True,
+        'posts': results
+    }
+
+
+@bp.route('/get-all-carts-by-order/<order_id>', methods=['GET'])
+@login_required
+def get_carts_by_orders(order_id):
+    username = g.user['username']
+
+    db = get_db()
+    carts = db.execute(
+        'SELECT DISTINCT oi.order_id, co.cart_id, oi.is_confirmed, oi.created_at, oi.updated_at '
+        'FROM order_info AS oi '
+        'JOIN carts_by_orders AS co '
+        'ON co.order_id = oi.order_id '
+        'JOIN shopping_cart_info AS si '
+        'ON si.cart_id = co.cart_id '
+        'WHERE si.username = ? AND oi.order_id = ? '
+        'ORDER BY oi.created_at ASC',
+        (username, order_id)
     ).fetchall()
 
     results = []
