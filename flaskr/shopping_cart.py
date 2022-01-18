@@ -93,7 +93,7 @@ def add_to_cart(cart_id):
         check_product = db.execute(
             'SELECT * FROM products '
             'WHERE product_id = ? '
-            'ORDER BY created_at ASC',
+            'LIMIT 1',
             (product['product_id'],)
         ).fetchall()
 
@@ -138,7 +138,7 @@ def add_to_cart(cart_id):
             db.commit()
 
     db.execute(
-        'UPDATE shopping_cart SET created_at = ? '
+        'UPDATE shopping_cart SET updated_at = ? '
         'WHERE cart_id = ?',
         (updated_at, cart_id)
     )
@@ -180,22 +180,13 @@ def get_products_by_cart_id(cart_id):
     db = get_db()
 
     products = db.execute(
-        'SELECT s.product_id, p.product_name, s.quantity, s.username, s.created_at, s.updated_at '
+        'SELECT s.product_id, p.product_name, s.quantity, s.username, s.created_at, s.updated_at, SUM(p.price * s.quantity) AS product_total_price '
         'FROM shopping_cart AS s '
         'INNER JOIN products AS p '
         'ON s.product_id = p.product_id '
         'WHERE s.cart_id = ? '
-        'ORDER BY s.created_at ASC',
-        (cart_id,)
-    ).fetchall()
-
-    calculation = db.execute(
-        'SELECT s.product_id, SUM(p.price * s.quantity) AS product_total_price '
-        'FROM shopping_cart AS s '
-        'INNER JOIN products AS p '
-        'ON s.product_id = p.product_id '
-        'WHERE s.cart_id = ? '
-        'GROUP BY s.product_id',
+        'GROUP BY s.product_id '
+        'ORDER BY s.created_at ASC ',
         (cart_id,)
     ).fetchall()
 
@@ -209,8 +200,8 @@ def get_products_by_cart_id(cart_id):
     updated_at = None
     total_price = 0
 
-    for i in range(len(products)):
-        formatted_data = dict(products[i])
+    for i in products:
+        formatted_data = dict(i)
         if not username:
             username = formatted_data['username']
 
@@ -223,8 +214,8 @@ def get_products_by_cart_id(cart_id):
         formatted_data.pop('username')
         formatted_data.pop('created_at')
         formatted_data.pop('updated_at')
-        formatted_data['product_total_price'] = round(calculation[i]['product_total_price'], 2)
-        total_price += calculation[i]['product_total_price']
+        formatted_data['product_total_price'] = round(formatted_data['product_total_price'], 2)
+        total_price += formatted_data['product_total_price']
         results.append(formatted_data)
 
     response['isSuccess'] = True

@@ -15,38 +15,50 @@ bp = Blueprint('orders', __name__, url_prefix='/orders')
 def create_shopping_cart():
     response = {
         'isSuccess': False,
-        'message': 'Create a shopping cart'
+        'message': 'Create an Order'
     }
 
     cart_ids = request.get_json()['cart_ids']
 
     order_id = str(uuid.uuid4())
     date_created = datetime.now()
+    order_final = 0
 
     db = get_db()
 
     for cart_id in cart_ids:
+        check_shopping_cart = db.execute(
+            'SELECT * FROM shopping_cart '
+            'WHERE cart_id = ? '
+            'LIMIT 1',
+            (cart_id,)
+        ).fetchall()
+
+        if len(check_shopping_cart) == 0:
+            response['error'] = f'No such product with the id = {cart_id}'
+            return response
+
         try:
             db.execute(
-                f'INSERT INTO shopping_cart(cart_id, username, date_created) VALUES (?, ?, ?)',
+                f'INSERT INTO orders(order_id, cart_id, date_created, order_final) VALUES (?, ?, ?, ?)',
                 (
                     order_id,
                     cart_id,
-                    date_created
+                    date_created,
+                    order_final
                 )
             )
             db.commit()
         except db.IntegrityError:
             response['error'] = f'{order_id} already exists.'
             return response
-        else:
-            response['isSuccess'] = True
-            response['cart_id'] = order_id
 
+    response['isSuccess'] = True
+    response['order_id'] = order_id
     return response
 
 
-@bp.route('/<cart_id>/add-to-order', methods=['PUT'])
+@bp.route('/add-to-order/<cart_id>/', methods=['PUT'])
 @login_required
 def add_to_cart(cart_id):
     response = {
