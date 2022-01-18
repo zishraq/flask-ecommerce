@@ -4,6 +4,8 @@ from flask import Flask
 from flask.json import JSONEncoder
 from datetime import date
 
+from flaskr import db, auth, products, shopping_cart, orders
+
 
 class CustomJSONEncoder(JSONEncoder):
     def default(self, obj):
@@ -32,27 +34,21 @@ app.json_encoder = CustomJSONEncoder
 def index():
     return 'Welcome to our Online Shop!'
 
-from flaskr import db
+
+@app.route('/init-db')
+def initialize_database():
+    db.init_db()
+    return {
+        'message': 'Database Initialized'
+    }
+
 
 db.init_app(app)
-
-from flaskr import auth
-
 app.register_blueprint(auth.bp)
-
-from flaskr import products
-
 app.register_blueprint(products.bp)
-
-from flaskr import shopping_cart
-
 app.register_blueprint(shopping_cart.bp)
-
-from flaskr import orders
-
 app.register_blueprint(orders.bp)
 app.add_url_rule('/', endpoint='index')
-
 
 if __name__ == '__main__':
     app.run(debug=True)
