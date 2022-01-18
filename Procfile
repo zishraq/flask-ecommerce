@@ -1,2 +1,2 @@
-web: gunicorn flask-tutorial.flaskr:app
+web: gunicorn flaskr:app
 
