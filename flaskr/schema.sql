@@ -45,22 +45,18 @@ CREATE TABLE product (
 );
 
 CREATE TABLE product_tags (
-    tag_id INT,
     tag_name TEXT,
     created_at TIMESTAMP,
     created_by TEXT ,
-    updated_at TIMESTAMP,
-    updated_by TEXT,
     PRIMARY KEY (tag_name),
-    FOREIGN KEY (created_by) REFERENCES user(username),
-    FOREIGN KEY (updated_by) REFERENCES user(username)
+    FOREIGN KEY (created_by) REFERENCES user(username)
 );
 
 CREATE TABLE product_by_tag (
-    tag_id TEXT,
+    tag_name TEXT,
     product_id TEXT,
-    PRIMARY KEY (tag_id, product_id),
-    FOREIGN KEY (tag_id) REFERENCES product_tags(tag_id),
+    PRIMARY KEY (tag_name, product_id),
+    FOREIGN KEY (tag_name) REFERENCES product_tags(tag_name),
     FOREIGN key (product_id) REFERENCES product(product_id)
 );
 

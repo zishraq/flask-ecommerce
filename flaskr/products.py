@@ -48,9 +48,33 @@ def add_product():
                 ),
             )
             db.commit()
+
         except db.IntegrityError:
             response['message'] = f'Product {product["product_name"]} already exists.'
             pass
+
+        for tag in product['tags']:
+            try:
+                db.execute(
+                    f'INSERT INTO product_tags (tag_name, created_at, created_by) VALUES (?, ?, ?)',
+                    (
+                        tag,
+                        creation_data['created_at'],
+                        creation_data['created_by']
+                    ),
+                )
+                db.commit()
+            except db.IntegrityError:
+                pass
+
+            db.execute(
+                f'INSERT INTO product_by_tag (tag_name, product_id) VALUES (?, ?)',
+                (
+                    tag,
+                    product['product_id'],
+                ),
+            )
+            db.commit()
 
     response['total_inserted_products'] = len(body['products'])
     response['inserted_products'] = body['products']

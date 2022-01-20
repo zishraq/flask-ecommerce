@@ -32,11 +32,13 @@ def add_product():
 
         try:
             db.execute(
-                f'INSERT INTO shipper (shipper_id, shipper_name, phone_number) VALUES (?, ?, ?)',
+                f'INSERT INTO shipper (shipper_id, shipper_name, phone_number, created_at, created_by) VALUES (?, ?, ?, ?, ?)',
                 (
                     shipper['shipper_id'],
                     shipper['shipper_name'],
-                    shipper['phone_number']
+                    shipper['phone_number'],
+                    shipper['created_at'],
+                    shipper['created_by']
                 ),
             )
             db.commit()
