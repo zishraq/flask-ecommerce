@@ -1,11 +1,18 @@
 DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS post;
 DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS product_tags;
+DROP TABLE IF EXISTS product_by_tag;
+DROP TABLE IF EXISTS product_wishlist;
 DROP TABLE IF EXISTS shopping_cart;
+DROP TABLE IF EXISTS shopping_cart_info;
 DROP TABLE IF EXISTS products_by_cart;
+DROP TABLE IF EXISTS product_by_cart;
+DROP TABLE IF EXISTS shipper;
+DROP TABLE IF EXISTS order_info;
+
 DROP TABLE IF EXISTS shopping_cart_info;
 DROP TABLE IF EXISTS orders;
-DROP TABLE IF EXISTS order_info;
 DROP TABLE IF EXISTS carts_by_orders;
 DROP TABLE IF EXISTS shipping;
 
@@ -16,10 +23,11 @@ CREATE TABLE user (
   email TEXT,
   phone TEXT,
   role TEXT,
+  address TEXT,
   joined_at TIMESTAMP
 );
 
-CREATE TABLE products (
+CREATE TABLE product (
     product_id TEXT PRIMARY KEY,
     product_name TEXT,
     description TEXT,
@@ -48,12 +56,20 @@ CREATE TABLE product_tags (
     FOREIGN KEY (updated_by) REFERENCES user(username)
 );
 
-CREATE TABLE products_by_tags (
-    tag_name TEXT,
+CREATE TABLE product_by_tag (
+    tag_id TEXT,
     product_id TEXT,
-    PRIMARY KEY (tag_name, product_id),
-    FOREIGN KEY (tag_name) REFERENCES product_tags(tag_name),
-    FOREIGN key (product_id) REFERENCES products(product_id)
+    PRIMARY KEY (tag_id, product_id),
+    FOREIGN KEY (tag_id) REFERENCES product_tags(tag_id),
+    FOREIGN key (product_id) REFERENCES product(product_id)
+);
+
+CREATE TABLE product_wishlist (
+    username TEXT,
+    product_id TEXT,
+    PRIMARY KEY (username, product_id),
+    FOREIGN key (product_id) REFERENCES product(product_id),
+    FOREIGN KEY (username) REFERENCES user(username)
 );
 
 CREATE TABLE shopping_cart_info (
@@ -65,7 +81,7 @@ CREATE TABLE shopping_cart_info (
     FOREIGN KEY (username) REFERENCES user(username)
 );
 
-CREATE TABLE products_by_cart (
+CREATE TABLE product_by_cart (
     cart_id TEXT,
     product_id TEXT,
     quantity INTEGER,
@@ -73,31 +89,24 @@ CREATE TABLE products_by_cart (
     updated_at TIMESTAMP,
     PRIMARY KEY(cart_id, product_id),
     FOREIGN KEY (cart_id) REFERENCES shopping_cart_info(cart_id),
-    FOREIGN KEY (product_id) REFERENCES products(product_id)
+    FOREIGN KEY (product_id) REFERENCES product(product_id)
+);
+
+CREATE TABLE shipper (
+    shipper_id TEXT,
+    shipper_name TEXT,
+    phone_number TEXT,
+    date_shipped TIMESTAMP,
+    PRIMARY KEY(shipper_id)
 );
 
 CREATE TABLE order_info (
     order_id TEXT,
     created_at TIMESTAMP,
-    updated_at TIMESTAMP,
-    is_confirmed INTEGER,
-    PRIMARY KEY(order_id)
-);
-
-CREATE TABLE carts_by_orders (
-    order_id TEXT,
-    cart_id TEXT,
-    added_at TIMESTAMP,
-    PRIMARY KEY(order_id, cart_id),
-    FOREIGN KEY (order_id) REFERENCES order_info(order_id),
-    FOREIGN KEY (cart_id) REFERENCES shopping_cart_info(cart_id)
-);
-
-CREATE TABLE shipping (
-    shipping_id TEXT,
-    order_id TEXT,
+    payment_method TEXT,
     address TEXT,
-    date_shipped TIMESTAMP,
-    PRIMARY KEY(shipping_id, order_id),
-    FOREIGN KEY (order_id) REFERENCES order_info(order_id)
+    shipper_id TEXT,
+    PRIMARY KEY(order_id),
+    FOREIGN KEY (order_id) REFERENCES shopping_cart_info(cart_id),
+    FOREIGN KEY (order_id) REFERENCES shopping_cart_info(cart_id)
 );

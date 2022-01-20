@@ -18,52 +18,34 @@ def create_shopping_cart():
         'message': 'Create a shopping cart'
     }
 
-    db = get_db()
+    cart_id = str(uuid.uuid4())
     username = g.user['username']
-    created_at = datetime.now()
-
-    check_shopping_cart = db.execute(
-        'SELECT * FROM shopping_cart_info '
-        'ORDER BY created_at '
-        'LIMIT 1',
-    ).fetchall()
-
-    shopping_cart_info = dict(check_shopping_cart[0])
-
-    check_order = db.execute(
-        'SELECT * FROM orders '
-        'WHERE order_id = ? '
-        'LIMIT 1',
-    ).fetchall()
-
-    if len(check_order) != 0:
-        cart_id = str(uuid.uuid4())
-
-        try:
-            db.execute(
-                f'INSERT INTO shopping_cart_info(cart_id, username, created_at) VALUES (?, ?, ?)',
-                (
-                    cart_id,
-                    username,
-                    created_at
-                )
-            )
-            db.commit()
-
-        except db.IntegrityError:
-            response['error'] = f'Product with id "{cart_id}" already exists.'
-            return response
-
-    else:
-        cart_id = shopping_cart_info['cart_id']
 
     added_products = request.get_json()['products']
+    created_at = datetime.now()
+
+    db = get_db()
+
+    try:
+        db.execute(
+            f'INSERT INTO shopping_cart_info(cart_id, username, created_at) VALUES (?, ?, ?)',
+            (
+                cart_id,
+                username,
+                created_at
+            )
+        )
+        db.commit()
+
+    except db.IntegrityError:
+        response['error'] = f'Product with id "{cart_id}" already exists.'
+        return response
 
     for product in added_products:
         check_product = db.execute(
             'SELECT * FROM products '
             'WHERE product_id = ? '
-            'LIMIT 1',
+            'ORDER BY created_at ASC',
             (product['product_id'],)
         ).fetchall()
 
