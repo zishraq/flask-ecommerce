@@ -4,7 +4,7 @@ from datetime import datetime
 from flask import Blueprint, flash, g, redirect, render_template, request, url_for, jsonify
 from werkzeug.exceptions import abort
 
-from flaskr.auth import login_required, authorize_add_product
+from flaskr.auth import login_required, authorization_required
 from flaskr.db import get_db
 
 bp = Blueprint('products', __name__, url_prefix='/products')
@@ -12,7 +12,7 @@ bp = Blueprint('products', __name__, url_prefix='/products')
 
 @bp.route('/add-product', methods=['POST'])
 @login_required
-@authorize_add_product
+@authorization_required
 def add_product():
     response = {
         'isSuccess': False,
@@ -60,7 +60,7 @@ def add_product():
 
 @bp.route('/delete-product/<product_id>', methods=['DELETE'])
 @login_required
-@authorize_add_product
+@authorization_required
 def delete_product(product_id):
     response = {
         'isSuccess': False,
@@ -89,7 +89,7 @@ def delete_product(product_id):
 
 @bp.route('/update-product/<product_id>', methods=['PUT'])
 @login_required
-@authorize_add_product
+@authorization_required
 def update_product(product_id):
     response = {
         'isSuccess': False,
@@ -101,7 +101,7 @@ def update_product(product_id):
     body = db.execute(
         'SELECT * FROM product '
         'WHERE product_id = ? '
-        'ORDER BY created_at ASC',
+        'LIMIT 1',
         (product_id,)
     ).fetchall()
 
@@ -155,9 +155,79 @@ def update_product(product_id):
 @bp.route('/all-products', methods=['GET'])
 def all_products():
     db = get_db()
+
+    username = g.user['username']
+
+    get_role = db.execute(
+        'SELECT role FROM user '
+        'WHERE username = ?',
+        (username,)
+    ).fetchall()
+
+    user_role = dict(get_role[0])['role']
+
+    if user_role == 'admin':
+        products = db.execute(
+            'SELECT * FROM product '
+            'ORDER BY total_sold DESC'
+        ).fetchall()
+    else:
+        products = db.execute(
+            'SELECT product_id, product_name, description, product_category, price, discount FROM product '
+            'ORDER BY total_sold DESC'
+        ).fetchall()
+
+    results = []
+
+    for i in products:
+        results.append(dict(i))
+
+    return jsonify({
+        'isSuccess': True,
+        'total_products': len(results),
+        'products': results
+    })
+
+
+@bp.route('/add-products-to-wishlist', methods=['POST'])
+def add_products_to_wishlist():
+    response = {
+        'isSuccess': False,
+        'operation': 'Add product to wishlist'
+    }
+
+    db = get_db()
+
+    body = dict(request.get_json())
+    username = g.user['username']
+
+    for product_id in body['product_ids']:
+        try:
+            db.execute(
+                f'INSERT INTO product_wishlist (username, product_id) VALUES (?, ?)',
+                (
+                    username,
+                    product_id
+                ),
+            )
+            db.commit()
+        except db.IntegrityError:
+            response['message'] = f'Product {product_id} already added.'
+            pass
+
+    response['isSuccess'] = True
+    return response
+
+
+@bp.route('/wishlist-products', methods=['GET'])
+def wishlist_products():
+    db = get_db()
+    username = g.user['username']
+
     products = db.execute(
-        'SELECT * FROM product '
-        'ORDER BY total_sold DESC'
+        'SELECT product_id, product_name, description, product_category, price, discount FROM product '
+        'WHERE product_id IN (SELECT DISTINCT product_id FROM product_wishlist WHERE username = ?)',
+        (username,)
     ).fetchall()
 
     results = []
@@ -168,5 +238,5 @@ def all_products():
     return jsonify({
         'isSuccess': True,
         'total_products': len(results),
-        'posts': results
+        'products': results
     })

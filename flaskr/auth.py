@@ -133,7 +133,7 @@ def login_required(view):
     return wrapped_view
 
 
-def authorize_add_product(view):
+def authorization_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user['role'] != 'admin':

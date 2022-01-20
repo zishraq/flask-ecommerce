@@ -4,7 +4,7 @@ from flask import Flask
 from flask.json import JSONEncoder
 from datetime import date
 
-from flaskr import db, auth, products, orders, shopping_cart
+from flaskr import db, auth, products, orders, shopping_cart, shippers
 
 
 class CustomJSONEncoder(JSONEncoder):
@@ -49,6 +49,7 @@ app.register_blueprint(auth.bp)
 app.register_blueprint(products.bp)
 app.register_blueprint(shopping_cart.bp)
 app.register_blueprint(orders.bp)
+app.register_blueprint(shippers.bp)
 app.add_url_rule('/', endpoint='index')
 
 

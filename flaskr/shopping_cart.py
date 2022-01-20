@@ -32,7 +32,6 @@ def create_shopping_cart():
     ).fetchall()
 
     if len(check_shopping_cart) == 0:
-        print('stuck here 1')
         cart_id = str(uuid.uuid4())
         is_new_cart = True
 

@@ -96,7 +96,8 @@ CREATE TABLE shipper (
     shipper_id TEXT,
     shipper_name TEXT,
     phone_number TEXT,
-    date_shipped TIMESTAMP,
+    created_at TIMESTAMP,
+    created_by TEXT,
     PRIMARY KEY(shipper_id)
 );
 
@@ -106,6 +107,8 @@ CREATE TABLE order_info (
     payment_method TEXT,
     address TEXT,
     shipper_id TEXT,
+    date_shipped TIMESTAMP,
+    shipment_created_by TEXT,
     PRIMARY KEY(order_id),
     FOREIGN KEY (order_id) REFERENCES shopping_cart_info(cart_id),
     FOREIGN KEY (order_id) REFERENCES shopping_cart_info(cart_id)
