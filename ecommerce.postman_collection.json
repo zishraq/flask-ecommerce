@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "25a54def-551e-4477-b3e2-b42413da95c2",
+		"_postman_id": "97a09f8a-bc90-473f-90d6-4807a30aa475",
 		"name": "ecommerce",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\",\r\n    \"role\": \"admin\"\r\n}",
+							"raw": "{\r\n    \"username\": \"zarin\",\r\n    \"password\": \"zarin\",\r\n    \"role\": \"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -224,7 +224,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+							"raw": "{\r\n    \"username\": \"zarin\",\r\n    \"password\": \"zarin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -278,13 +278,13 @@
 			"name": "products",
 			"item": [
 				{
-					"name": "add_product",
+					"name": "add-product",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"product_name\": \"test book 1\",\r\n    \"description\": \"test description 1\",\r\n    \"product_category\": \"book\",\r\n    \"price\": 54.50,\r\n    \"discount\": 15.50,\r\n    \"in_stock\": 5\r\n}",
+							"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"product_name\": \"Havit KB271\",\r\n            \"description\": \"USB Exquisite Keyboard with Bangla\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 420,\r\n            \"discount\": 30,\r\n            \"in_stock\": 32\r\n        },\r\n        {\r\n            \"product_name\": \"Meetion MT-K202 \",\r\n            \"description\": \"USB Waterproof Wired Keyboard\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 500,\r\n            \"discount\": 40,\r\n            \"in_stock\": 25\r\n        },\r\n        {\r\n            \"product_name\": \"Micropack K-206 \",\r\n            \"description\": \"USB Keyboard\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 380,\r\n            \"discount\": 50,\r\n            \"in_stock\": 30\r\n        },\r\n        {\r\n            \"product_name\": \"Delux KA190U \",\r\n            \"description\": \"USB Multimedia Keyboard\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 650,\r\n            \"discount\": 150,\r\n            \"in_stock\": 35\r\n        },\r\n        {\r\n            \"product_name\": \"Meetion MT-K841 \",\r\n            \"description\": \" USB Ultrathin Standard Chocolate Keyboard\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 550,\r\n            \"discount\": 40,\r\n            \"in_stock\": 28\r\n        },\r\n        {\r\n            \"product_name\": \"Walton WKS005WN \",\r\n            \"description\": \"USB Bangla & English Keyboard\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 600,\r\n            \"discount\": 0,\r\n            \"in_stock\": 15\r\n        },\r\n        {\r\n            \"product_name\": \"Meetion MT-K841\",\r\n            \"description\": \"USB Ultrathin Standard Chocolate Keyboard\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 480,\r\n            \"discount\": 30,\r\n            \"in_stock\": 20\r\n        },\r\n        {\r\n            \"product_name\": \"Xtreme K911\",\r\n            \"description\": \"USB Mini Keyboard\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 500,\r\n            \"discount\": 0,\r\n            \"in_stock\": 29\r\n        },\r\n        {\r\n            \"product_name\": \"Golden Field GF-K301 \",\r\n            \"description\": \"Wired Multimedia Keyboard with Bangla\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 400,\r\n            \"discount\": 0,\r\n            \"in_stock\": 30\r\n        },\r\n        {\r\n            \"product_name\": \"Rapoo NK1700\",\r\n            \"description\": \"wired usb 2.0 keyboard\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 700,\r\n            \"discount\": 70,\r\n            \"in_stock\": 34\r\n        },\r\n        {\r\n            \"product_name\": \"Micropack K203 \",\r\n            \"description\": \"Basic USB Keyboard\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 370,\r\n            \"discount\": 0,\r\n            \"in_stock\": 22\r\n        },\r\n        {\r\n            \"product_name\": \"Targus Armor\",\r\n            \"description\": \"Mini Blue Trace Wired USB Mouse\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 220,\r\n            \"discount\": 20,\r\n            \"in_stock\": 34\r\n        },\r\n        {\r\n            \"product_name\": \"Micropack M103\",\r\n            \"description\": \"Optical USB Mouse\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 250,\r\n            \"discount\": 0,\r\n            \"in_stock\": 30\r\n        },\r\n        {\r\n            \"product_name\": \"Targus U575\",\r\n            \"description\": \"USB Wired Optical Mouse(Black)\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 275,\r\n            \"discount\": 50,\r\n            \"in_stock\": 28\r\n        },\r\n        {\r\n            \"product_name\": \"Walton WMS024WN\",\r\n            \"description\": \"USB Mouse\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 280,\r\n            \"discount\": 30,\r\n            \"in_stock\": 25\r\n        },\r\n        {\r\n            \"product_name\": \"MotoSpeed F303 \",\r\n            \"description\": \"USB Optical Mouse\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 300,\r\n            \"discount\": 25,\r\n            \"in_stock\": 32\r\n        },\r\n        {\r\n            \"product_name\": \"Targus W571\",\r\n            \"description\": \"Wirless Optical Mouse (Black)\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 350,\r\n            \"discount\": 0,\r\n            \"in_stock\": 24\r\n        },\r\n        {\r\n            \"product_name\": \"Rapoo N6000\",\r\n            \"description\": \"USB Mini Mouse\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 450,\r\n            \"discount\": 0,\r\n            \"in_stock\": 20\r\n        },\r\n        {\r\n            \"product_name\": \"Logitech M90\",\r\n            \"description\": \"USB Contoured Shape MOUSE\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 412,\r\n            \"discount\": 0,\r\n            \"in_stock\": 22\r\n        },\r\n        {\r\n            \"product_name\": \"Motospeed G370\",\r\n            \"description\": \"Wireless Mouse\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 430,\r\n            \"discount\": 0,\r\n            \"in_stock\": 26\r\n        },\r\n        {\r\n            \"product_name\": \"A4Tech FM12\",\r\n            \"description\": \"FSTYLER USB Mouse Black\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 400,\r\n            \"discount\": 30,\r\n            \"in_stock\": 35\r\n        },\r\n        {\r\n            \"product_name\": \"FANTECH W188\",\r\n            \"description\": \"2.4GHz Wireless Office Mouse White\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 600,\r\n            \"discount\": 30,\r\n            \"in_stock\": 34\r\n        },\r\n        {\r\n            \"product_name\": \"Havit MS691\",\r\n            \"description\": \"Ergonomic RGB Gaming Mouse\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 650,\r\n            \"discount\": 60,\r\n            \"in_stock\": 29\r\n        },\r\n        {\r\n            \"product_name\": \"AOC E970SWN5\",\r\n            \"description\": \"18.5 inch LED Backlit Monitor\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 9500,\r\n            \"discount\": 200,\r\n            \"in_stock\": 32\r\n        },\r\n        {\r\n            \"product_name\": \"Lenovo D19-10\",\r\n            \"description\": \"18.5 Inch HD HDMI VGA Monitor\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 10100,\r\n            \"discount\": 300,\r\n            \"in_stock\": 27\r\n        },\r\n        {\r\n            \"product_name\": \"PHILIPS\",\r\n            \"description\": \"18.5 Inch 193V5LSB2 LED MONITOR\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 9800,\r\n            \"discount\": 0,\r\n            \"in_stock\": 25\r\n        },\r\n        {\r\n            \"product_name\": \"Dell E1916HV \",\r\n            \"description\": \"18.5 Inch LED Monitor (VGA)\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 10530,\r\n            \"discount\": 400,\r\n            \"in_stock\": 28\r\n        },\r\n        {\r\n            \"product_name\": \"Dell D1918H\",\r\n            \"description\": \"18.5 Inch LED Monitor (VGA, HDMI)\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 10700,\r\n            \"discount\": 0,\r\n            \"in_stock\": 32\r\n        },\r\n        {\r\n            \"product_name\": \"LG 19M38A \",\r\n            \"description\": \"18.5 Inch Monitor\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 12000,\r\n            \"discount\": 500,\r\n            \"in_stock\": 35\r\n        },\r\n        {\r\n            \"product_name\": \"HP P204v\",\r\n            \"description\": \"19.5 Inch HD LED Monitor (HDMI, VGA)\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 11400,\r\n            \"discount\": 300,\r\n            \"in_stock\": 23\r\n        },\r\n        {\r\n            \"product_name\": \"Xiaomi Redmi 1A\",\r\n            \"description\": \"23.8 Monitor\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 13600,\r\n            \"discount\": 0,\r\n            \"in_stock\": 30\r\n        },\r\n        {\r\n            \"product_name\": \"AOC E2270SWHN\",\r\n            \"description\": \"21.5 Inch Full HD LED Monitor\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 11500,\r\n            \"discount\": 300,\r\n            \"in_stock\": 26\r\n        },\r\n        {\r\n            \"product_name\": \"LG 22MK430H-B\",\r\n            \"description\": \"22 Inch Full HD IPS LED Monitor with AMD FreeSync\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 13700,\r\n            \"discount\": 200,\r\n            \"in_stock\": 29\r\n        },\r\n        {\r\n            \"product_name\": \"HP V22\",\r\n            \"description\": \"21.5 Inch LED Full HD Monitor\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 13400,\r\n            \"discount\": 0,\r\n            \"in_stock\": 34\r\n        },\r\n        {\r\n            \"product_name\": \"Dell SE2222H \",\r\n            \"description\": \"21.5 Inch FHD Monitor\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 15600,\r\n            \"discount\": 150,\r\n            \"in_stock\": 24\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -292,7 +292,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/products/add_product",
+							"raw": "http://127.0.0.1:5000/products/add-product",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -303,42 +303,70 @@
 							"port": "5000",
 							"path": [
 								"products",
-								"add_product"
+								"add-product"
 							]
 						}
 					},
-					"response": []
-				},
-				{
-					"name": "add_multiple_product",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"product_name\": \"test book 17\",\r\n            \"description\": \"test description 17\",\r\n            \"product_category\": \"book\",\r\n            \"price\": 54.50,\r\n            \"discount\": 15.50,\r\n            \"in_stock\": 5\r\n        },\r\n        {\r\n            \"product_name\": \"test book 18\",\r\n            \"description\": \"test description 18\",\r\n            \"product_category\": \"book\",\r\n            \"price\": 54.50,\r\n            \"discount\": 15.50,\r\n            \"in_stock\": 5\r\n        }\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"response": [
+						{
+							"name": "add-product",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"product_name\": \"Havit KB271\",\r\n            \"description\": \"USB Exquisite Keyboard with Bangla\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 420,\r\n            \"discount\": 30,\r\n            \"in_stock\": 32\r\n        },\r\n        {\r\n            \"product_name\": \"Meetion MT-K202 \",\r\n            \"description\": \"USB Waterproof Wired Keyboard\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 500,\r\n            \"discount\": 40,\r\n            \"in_stock\": 25\r\n        },\r\n        {\r\n            \"product_name\": \"Micropack K-206 \",\r\n            \"description\": \"USB Keyboard\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 380,\r\n            \"discount\": 50,\r\n            \"in_stock\": 30\r\n        },\r\n        {\r\n            \"product_name\": \"Delux KA190U \",\r\n            \"description\": \"USB Multimedia Keyboard\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 650,\r\n            \"discount\": 150,\r\n            \"in_stock\": 35\r\n        },\r\n        {\r\n            \"product_name\": \"Meetion MT-K841 \",\r\n            \"description\": \" USB Ultrathin Standard Chocolate Keyboard\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 550,\r\n            \"discount\": 40,\r\n            \"in_stock\": 28\r\n        },\r\n        {\r\n            \"product_name\": \"Walton WKS005WN \",\r\n            \"description\": \"USB Bangla & English Keyboard\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 600,\r\n            \"discount\": 0,\r\n            \"in_stock\": 15\r\n        },\r\n        {\r\n            \"product_name\": \"Meetion MT-K841\",\r\n            \"description\": \"USB Ultrathin Standard Chocolate Keyboard\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 480,\r\n            \"discount\": 30,\r\n            \"in_stock\": 20\r\n        },\r\n        {\r\n            \"product_name\": \"Xtreme K911\",\r\n            \"description\": \"USB Mini Keyboard\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 500,\r\n            \"discount\": 0,\r\n            \"in_stock\": 29\r\n        },\r\n        {\r\n            \"product_name\": \"Golden Field GF-K301 \",\r\n            \"description\": \"Wired Multimedia Keyboard with Bangla\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 400,\r\n            \"discount\": 0,\r\n            \"in_stock\": 30\r\n        },\r\n        {\r\n            \"product_name\": \"Rapoo NK1700\",\r\n            \"description\": \"wired usb 2.0 keyboard\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 700,\r\n            \"discount\": 70,\r\n            \"in_stock\": 34\r\n        },\r\n        {\r\n            \"product_name\": \"Micropack K203 \",\r\n            \"description\": \"Basic USB Keyboard\",\r\n            \"product_category\": \"Keyboard\",\r\n            \"price\": 370,\r\n            \"discount\": 0,\r\n            \"in_stock\": 22\r\n        },\r\n        {\r\n            \"product_name\": \"Targus Armor\",\r\n            \"description\": \"Mini Blue Trace Wired USB Mouse\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 220,\r\n            \"discount\": 20,\r\n            \"in_stock\": 34\r\n        },\r\n        {\r\n            \"product_name\": \"Micropack M103\",\r\n            \"description\": \"Optical USB Mouse\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 250,\r\n            \"discount\": 0,\r\n            \"in_stock\": 30\r\n        },\r\n        {\r\n            \"product_name\": \"Targus U575\",\r\n            \"description\": \"USB Wired Optical Mouse(Black)\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 275,\r\n            \"discount\": 50,\r\n            \"in_stock\": 28\r\n        },\r\n        {\r\n            \"product_name\": \"Walton WMS024WN\",\r\n            \"description\": \"USB Mouse\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 280,\r\n            \"discount\": 30,\r\n            \"in_stock\": 25\r\n        },\r\n        {\r\n            \"product_name\": \"MotoSpeed F303 \",\r\n            \"description\": \"USB Optical Mouse\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 300,\r\n            \"discount\": 25,\r\n            \"in_stock\": 32\r\n        },\r\n        {\r\n            \"product_name\": \"Targus W571\",\r\n            \"description\": \"Wirless Optical Mouse (Black)\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 350,\r\n            \"discount\": 0,\r\n            \"in_stock\": 24\r\n        },\r\n        {\r\n            \"product_name\": \"Rapoo N6000\",\r\n            \"description\": \"USB Mini Mouse\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 450,\r\n            \"discount\": 0,\r\n            \"in_stock\": 20\r\n        },\r\n        {\r\n            \"product_name\": \"Logitech M90\",\r\n            \"description\": \"USB Contoured Shape MOUSE\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 412,\r\n            \"discount\": 0,\r\n            \"in_stock\": 22\r\n        },\r\n        {\r\n            \"product_name\": \"Motospeed G370\",\r\n            \"description\": \"Wireless Mouse\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 430,\r\n            \"discount\": 0,\r\n            \"in_stock\": 26\r\n        },\r\n        {\r\n            \"product_name\": \"A4Tech FM12\",\r\n            \"description\": \"FSTYLER USB Mouse Black\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 400,\r\n            \"discount\": 30,\r\n            \"in_stock\": 35\r\n        },\r\n        {\r\n            \"product_name\": \"FANTECH W188\",\r\n            \"description\": \"2.4GHz Wireless Office Mouse White\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 600,\r\n            \"discount\": 30,\r\n            \"in_stock\": 34\r\n        },\r\n        {\r\n            \"product_name\": \"Havit MS691\",\r\n            \"description\": \"Ergonomic RGB Gaming Mouse\",\r\n            \"product_category\": \"Mouse\",\r\n            \"price\": 650,\r\n            \"discount\": 60,\r\n            \"in_stock\": 29\r\n        },\r\n        {\r\n            \"product_name\": \"AOC E970SWN5\",\r\n            \"description\": \"18.5 inch LED Backlit Monitor\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 9500,\r\n            \"discount\": 200,\r\n            \"in_stock\": 32\r\n        },\r\n        {\r\n            \"product_name\": \"Lenovo D19-10\",\r\n            \"description\": \"18.5 Inch HD HDMI VGA Monitor\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 10100,\r\n            \"discount\": 300,\r\n            \"in_stock\": 27\r\n        },\r\n        {\r\n            \"product_name\": \"PHILIPS\",\r\n            \"description\": \"18.5 Inch 193V5LSB2 LED MONITOR\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 9800,\r\n            \"discount\": 0,\r\n            \"in_stock\": 25\r\n        },\r\n        {\r\n            \"product_name\": \"Dell E1916HV \",\r\n            \"description\": \"18.5 Inch LED Monitor (VGA)\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 10530,\r\n            \"discount\": 400,\r\n            \"in_stock\": 28\r\n        },\r\n        {\r\n            \"product_name\": \"Dell D1918H\",\r\n            \"description\": \"18.5 Inch LED Monitor (VGA, HDMI)\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 10700,\r\n            \"discount\": 0,\r\n            \"in_stock\": 32\r\n        },\r\n        {\r\n            \"product_name\": \"LG 19M38A \",\r\n            \"description\": \"18.5 Inch Monitor\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 12000,\r\n            \"discount\": 500,\r\n            \"in_stock\": 35\r\n        },\r\n        {\r\n            \"product_name\": \"HP P204v\",\r\n            \"description\": \"19.5 Inch HD LED Monitor (HDMI, VGA)\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 11400,\r\n            \"discount\": 300,\r\n            \"in_stock\": 23\r\n        },\r\n        {\r\n            \"product_name\": \"Xiaomi Redmi 1A\",\r\n            \"description\": \"23.8 Monitor\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 13600,\r\n            \"discount\": 0,\r\n            \"in_stock\": 30\r\n        },\r\n        {\r\n            \"product_name\": \"AOC E2270SWHN\",\r\n            \"description\": \"21.5 Inch Full HD LED Monitor\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 11500,\r\n            \"discount\": 300,\r\n            \"in_stock\": 26\r\n        },\r\n        {\r\n            \"product_name\": \"LG 22MK430H-B\",\r\n            \"description\": \"22 Inch Full HD IPS LED Monitor with AMD FreeSync\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 13700,\r\n            \"discount\": 200,\r\n            \"in_stock\": 29\r\n        },\r\n        {\r\n            \"product_name\": \"HP V22\",\r\n            \"description\": \"21.5 Inch LED Full HD Monitor\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 13400,\r\n            \"discount\": 0,\r\n            \"in_stock\": 34\r\n        },\r\n        {\r\n            \"product_name\": \"Dell SE2222H \",\r\n            \"description\": \"21.5 Inch FHD Monitor\",\r\n            \"product_category\": \"Monitor\",\r\n            \"price\": 15600,\r\n            \"discount\": 150,\r\n            \"in_stock\": 24\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5000/products/add-product",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"products",
+										"add-product"
+									]
 								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:5000/add_product",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9721"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.2 Python/3.9.5"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 20 Jan 2022 18:25:50 GMT"
+								}
 							],
-							"port": "5000",
-							"path": [
-								"add_product"
-							]
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"operation\": \"Add product\",\n    \"total_inserted_products\": 35,\n    \"inserted_products\": [\n        {\n            \"product_name\": \"Havit KB271\",\n            \"description\": \"USB Exquisite Keyboard with Bangla\",\n            \"product_category\": \"Keyboard\",\n            \"price\": 420,\n            \"discount\": 30,\n            \"in_stock\": 32,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"89f27ef7-29d8-4a8b-adb4-534156d309a5\"\n        },\n        {\n            \"product_name\": \"Meetion MT-K202 \",\n            \"description\": \"USB Waterproof Wired Keyboard\",\n            \"product_category\": \"Keyboard\",\n            \"price\": 500,\n            \"discount\": 40,\n            \"in_stock\": 25,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"d9d8735c-2fe0-410d-8563-c60c48a8db6d\"\n        },\n        {\n            \"product_name\": \"Micropack K-206 \",\n            \"description\": \"USB Keyboard\",\n            \"product_category\": \"Keyboard\",\n            \"price\": 380,\n            \"discount\": 50,\n            \"in_stock\": 30,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"24a4abaa-d2d9-4b5e-9ea4-6f1b0c844379\"\n        },\n        {\n            \"product_name\": \"Delux KA190U \",\n            \"description\": \"USB Multimedia Keyboard\",\n            \"product_category\": \"Keyboard\",\n            \"price\": 650,\n            \"discount\": 150,\n            \"in_stock\": 35,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"2d752bbb-58e7-4e5e-97e7-41838da57f7f\"\n        },\n        {\n            \"product_name\": \"Meetion MT-K841 \",\n            \"description\": \" USB Ultrathin Standard Chocolate Keyboard\",\n            \"product_category\": \"Keyboard\",\n            \"price\": 550,\n            \"discount\": 40,\n            \"in_stock\": 28,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"a654b4f6-6f4e-40e9-b2ad-2e6b184bd671\"\n        },\n        {\n            \"product_name\": \"Walton WKS005WN \",\n            \"description\": \"USB Bangla & English Keyboard\",\n            \"product_category\": \"Keyboard\",\n            \"price\": 600,\n            \"discount\": 0,\n            \"in_stock\": 15,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"675da1c6-fc1c-4417-96e3-0585d79c4dc6\"\n        },\n        {\n            \"product_name\": \"Meetion MT-K841\",\n            \"description\": \"USB Ultrathin Standard Chocolate Keyboard\",\n            \"product_category\": \"Keyboard\",\n            \"price\": 480,\n            \"discount\": 30,\n            \"in_stock\": 20,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"3148f5ba-5454-4da2-9e6a-1416a6152164\"\n        },\n        {\n            \"product_name\": \"Xtreme K911\",\n            \"description\": \"USB Mini Keyboard\",\n            \"product_category\": \"Keyboard\",\n            \"price\": 500,\n            \"discount\": 0,\n            \"in_stock\": 29,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"c2c3eb39-fed2-40c5-9f9e-d86f8a01b1a8\"\n        },\n        {\n            \"product_name\": \"Golden Field GF-K301 \",\n            \"description\": \"Wired Multimedia Keyboard with Bangla\",\n            \"product_category\": \"Keyboard\",\n            \"price\": 400,\n            \"discount\": 0,\n            \"in_stock\": 30,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"58dbe196-32c7-47f7-9e15-22f8a638ccc5\"\n        },\n        {\n            \"product_name\": \"Rapoo NK1700\",\n            \"description\": \"wired usb 2.0 keyboard\",\n            \"product_category\": \"Keyboard\",\n            \"price\": 700,\n            \"discount\": 70,\n            \"in_stock\": 34,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"95a78dd5-42d0-4f64-94d3-0b87724ba84a\"\n        },\n        {\n            \"product_name\": \"Micropack K203 \",\n            \"description\": \"Basic USB Keyboard\",\n            \"product_category\": \"Keyboard\",\n            \"price\": 370,\n            \"discount\": 0,\n            \"in_stock\": 22,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"0fbcc7eb-49df-4532-b169-894cbd82fdda\"\n        },\n        {\n            \"product_name\": \"Targus Armor\",\n            \"description\": \"Mini Blue Trace Wired USB Mouse\",\n            \"product_category\": \"Mouse\",\n            \"price\": 220,\n            \"discount\": 20,\n            \"in_stock\": 34,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"93bf0f14-6b2b-4087-beb0-a40d3872a5a7\"\n        },\n        {\n            \"product_name\": \"Micropack M103\",\n            \"description\": \"Optical USB Mouse\",\n            \"product_category\": \"Mouse\",\n            \"price\": 250,\n            \"discount\": 0,\n            \"in_stock\": 30,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"d6215cd2-579a-4f41-bed9-605b986985ef\"\n        },\n        {\n            \"product_name\": \"Targus U575\",\n            \"description\": \"USB Wired Optical Mouse(Black)\",\n            \"product_category\": \"Mouse\",\n            \"price\": 275,\n            \"discount\": 50,\n            \"in_stock\": 28,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"17db1681-c712-4663-b802-e7753452dec2\"\n        },\n        {\n            \"product_name\": \"Walton WMS024WN\",\n            \"description\": \"USB Mouse\",\n            \"product_category\": \"Mouse\",\n            \"price\": 280,\n            \"discount\": 30,\n            \"in_stock\": 25,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"a6539277-a05e-4370-9bd6-0f7dae40771c\"\n        },\n        {\n            \"product_name\": \"MotoSpeed F303 \",\n            \"description\": \"USB Optical Mouse\",\n            \"product_category\": \"Mouse\",\n            \"price\": 300,\n            \"discount\": 25,\n            \"in_stock\": 32,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"fc38307e-50ec-464a-a606-d6adaf798ee3\"\n        },\n        {\n            \"product_name\": \"Targus W571\",\n            \"description\": \"Wirless Optical Mouse (Black)\",\n            \"product_category\": \"Mouse\",\n            \"price\": 350,\n            \"discount\": 0,\n            \"in_stock\": 24,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"534abee8-8109-42ad-832f-11a7a6e66ce4\"\n        },\n        {\n            \"product_name\": \"Rapoo N6000\",\n            \"description\": \"USB Mini Mouse\",\n            \"product_category\": \"Mouse\",\n            \"price\": 450,\n            \"discount\": 0,\n            \"in_stock\": 20,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"5efac6e4-4a36-4323-be74-66d8dfa9c6df\"\n        },\n        {\n            \"product_name\": \"Logitech M90\",\n            \"description\": \"USB Contoured Shape MOUSE\",\n            \"product_category\": \"Mouse\",\n            \"price\": 412,\n            \"discount\": 0,\n            \"in_stock\": 22,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"86f12759-fd7d-4c0b-bda8-82517a777c71\"\n        },\n        {\n            \"product_name\": \"Motospeed G370\",\n            \"description\": \"Wireless Mouse\",\n            \"product_category\": \"Mouse\",\n            \"price\": 430,\n            \"discount\": 0,\n            \"in_stock\": 26,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"d7ca5247-4973-4b76-b69d-35586003e8f2\"\n        },\n        {\n            \"product_name\": \"A4Tech FM12\",\n            \"description\": \"FSTYLER USB Mouse Black\",\n            \"product_category\": \"Mouse\",\n            \"price\": 400,\n            \"discount\": 30,\n            \"in_stock\": 35,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"01606bc9-d24d-411d-92b6-bdf75cd9c3ed\"\n        },\n        {\n            \"product_name\": \"FANTECH W188\",\n            \"description\": \"2.4GHz Wireless Office Mouse White\",\n            \"product_category\": \"Mouse\",\n            \"price\": 600,\n            \"discount\": 30,\n            \"in_stock\": 34,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"edc86db3-1285-4477-930a-e2b6e8d36d31\"\n        },\n        {\n            \"product_name\": \"Havit MS691\",\n            \"description\": \"Ergonomic RGB Gaming Mouse\",\n            \"product_category\": \"Mouse\",\n            \"price\": 650,\n            \"discount\": 60,\n            \"in_stock\": 29,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"8be340db-559b-43b7-b909-9a3960cda5e0\"\n        },\n        {\n            \"product_name\": \"AOC E970SWN5\",\n            \"description\": \"18.5 inch LED Backlit Monitor\",\n            \"product_category\": \"Monitor\",\n            \"price\": 9500,\n            \"discount\": 200,\n            \"in_stock\": 32,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"566230ef-2d2b-4f99-a07e-02fdda654e22\"\n        },\n        {\n            \"product_name\": \"Lenovo D19-10\",\n            \"description\": \"18.5 Inch HD HDMI VGA Monitor\",\n            \"product_category\": \"Monitor\",\n            \"price\": 10100,\n            \"discount\": 300,\n            \"in_stock\": 27,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"c5ecf0aa-fae0-436f-84ae-3ee13e027f61\"\n        },\n        {\n            \"product_name\": \"PHILIPS\",\n            \"description\": \"18.5 Inch 193V5LSB2 LED MONITOR\",\n            \"product_category\": \"Monitor\",\n            \"price\": 9800,\n            \"discount\": 0,\n            \"in_stock\": 25,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"ff0e3eee-2d6c-4e26-8163-5f941f344e80\"\n        },\n        {\n            \"product_name\": \"Dell E1916HV \",\n            \"description\": \"18.5 Inch LED Monitor (VGA)\",\n            \"product_category\": \"Monitor\",\n            \"price\": 10530,\n            \"discount\": 400,\n            \"in_stock\": 28,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"acb977eb-ddbc-4ad6-8790-92e9301e7e2f\"\n        },\n        {\n            \"product_name\": \"Dell D1918H\",\n            \"description\": \"18.5 Inch LED Monitor (VGA, HDMI)\",\n            \"product_category\": \"Monitor\",\n            \"price\": 10700,\n            \"discount\": 0,\n            \"in_stock\": 32,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"0fcd8203-df92-4fdf-9ea5-3b52ab74ce7e\"\n        },\n        {\n            \"product_name\": \"LG 19M38A \",\n            \"description\": \"18.5 Inch Monitor\",\n            \"product_category\": \"Monitor\",\n            \"price\": 12000,\n            \"discount\": 500,\n            \"in_stock\": 35,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"f7af46f8-54bf-46b8-adf3-ad10b432bd8f\"\n        },\n        {\n            \"product_name\": \"HP P204v\",\n            \"description\": \"19.5 Inch HD LED Monitor (HDMI, VGA)\",\n            \"product_category\": \"Monitor\",\n            \"price\": 11400,\n            \"discount\": 300,\n            \"in_stock\": 23,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"7615dbb2-8a5e-4fb8-b542-c08ebfceef4d\"\n        },\n        {\n            \"product_name\": \"Xiaomi Redmi 1A\",\n            \"description\": \"23.8 Monitor\",\n            \"product_category\": \"Monitor\",\n            \"price\": 13600,\n            \"discount\": 0,\n            \"in_stock\": 30,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"b8ee4304-eb2a-47aa-a35b-7dab3ebbe4d6\"\n        },\n        {\n            \"product_name\": \"AOC E2270SWHN\",\n            \"description\": \"21.5 Inch Full HD LED Monitor\",\n            \"product_category\": \"Monitor\",\n            \"price\": 11500,\n            \"discount\": 300,\n            \"in_stock\": 26,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"f79f485a-892b-4054-9546-b9ace1187c16\"\n        },\n        {\n            \"product_name\": \"LG 22MK430H-B\",\n            \"description\": \"22 Inch Full HD IPS LED Monitor with AMD FreeSync\",\n            \"product_category\": \"Monitor\",\n            \"price\": 13700,\n            \"discount\": 200,\n            \"in_stock\": 29,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"572f941e-edac-441f-91e7-b25980fd1ff0\"\n        },\n        {\n            \"product_name\": \"HP V22\",\n            \"description\": \"21.5 Inch LED Full HD Monitor\",\n            \"product_category\": \"Monitor\",\n            \"price\": 13400,\n            \"discount\": 0,\n            \"in_stock\": 34,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"3e0af6ea-f074-48b8-b909-f0e80dfd1953\"\n        },\n        {\n            \"product_name\": \"Dell SE2222H \",\n            \"description\": \"21.5 Inch FHD Monitor\",\n            \"product_category\": \"Monitor\",\n            \"price\": 15600,\n            \"discount\": 150,\n            \"in_stock\": 24,\n            \"created_at\": \"2022-01-21 00:25:50.520578\",\n            \"created_by\": \"zarin\",\n            \"total_sold\": 0,\n            \"product_id\": \"66be891a-648b-45c3-bb9d-6272df4169db\"\n        }\n    ]\n}"
 						}
-					},
-					"response": []
+					]
 				},
 				{
 					"name": "all-products",
@@ -362,63 +390,15 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "shopping_cart",
-			"item": [
-				{
-					"name": "create-shopping-cart",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.globals.set(\"cart_id\", pm.response.json().cart_id);\r",
-									"\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Cookie",
-								"value": "session=eyJ1c2VybmFtZSI6Im1hcmN1c19hdXJlbGl1cyJ9.YdsuOw.CFS8oPHteEs3aTWlcl8N5-ajcQ4; HttpOnly; Path=/",
-								"type": "default",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:5000/shopping-cart/create-shopping-cart",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"shopping-cart",
-								"create-shopping-cart"
-							]
-						}
-					},
-					"response": []
 				},
 				{
-					"name": "add-to-cart",
+					"name": "update-product",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"product_name\": \"test book 1\",\r\n    \"quantity\": 5\r\n}",
+							"raw": "{\r\n    \"product_name\": \"test book 1 updated\",\r\n    \"description\": \"test description 1 updated\",\r\n    \"product_category\": \"book\",\r\n    \"price\": 51.20,\r\n    \"discount\": 15.50\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -426,7 +406,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/shopping-cart/add-to-cart/{{cart_id}}",
+							"raw": "http://127.0.0.1:5000/products/update-product/{{product_id}}",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -436,21 +416,59 @@
 							],
 							"port": "5000",
 							"path": [
-								"shopping-cart",
-								"add-to-cart",
-								"{{cart_id}}"
+								"products",
+								"update-product",
+								"{{product_id}}"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "get-all-carts",
+					"name": "delete-product",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/shopping-cart/get-all-carts",
+							"raw": "http://127.0.0.1:5000/products/delete-product/{{product_id}}",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"products",
+								"delete-product",
+								"{{product_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "shopping_cart",
+			"item": [
+				{
+					"name": "add-to-cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"product_id\": \"01606bc9-d24d-411d-92b6-bdf75cd9c3ed\",\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"product_id\": \"ff0e3eee-2d6c-4e26-8163-5f941f344e80\",\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/shopping-cart/add-to-cart",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -461,7 +479,290 @@
 							"port": "5000",
 							"path": [
 								"shopping-cart",
-								"get-all-carts"
+								"add-to-cart"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "add-to-cart",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"product_id\": \"01606bc9-d24d-411d-92b6-bdf75cd9c3ed\",\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"product_id\": \"ff0e3eee-2d6c-4e26-8163-5f941f344e80\",\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5000/shopping-cart/add-to-cart",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"shopping-cart",
+										"add-to-cart"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.2 Python/3.9.5"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 20 Jan 2022 18:29:21 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Products added to shopping cart\"\n}"
+						}
+					]
+				},
+				{
+					"name": "get-products-in-cart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/shopping-cart/get-products-in-cart",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"shopping-cart",
+								"get-products-in-cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-from-shopping-cart",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/shopping-cart/delete-from-shopping-cart/{{product_id}}",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"shopping-cart",
+								"delete-from-shopping-cart",
+								"{{product_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "orders",
+			"item": [
+				{
+					"name": "make-order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"order_id\", pm.response.json().order_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"payment_method\": \"credit_card\",\r\n    \"address\": \"Banasree\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/orders/make-order",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"orders",
+								"make-order"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "make-order",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"payment_method\": \"credit_card\",\r\n    \"address\": \"Banasree\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5000/orders/make-order",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"orders",
+										"make-order"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "97"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.2 Python/3.9.5"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 20 Jan 2022 18:30:03 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"message\": \"Create an Order\",\n    \"order_id\": \"045216ce-b29b-424e-a76f-afaccb6ea12b\"\n}"
+						}
+					]
+				},
+				{
+					"name": "get-all-orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/orders/get-all-orders",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"orders",
+								"get-all-orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-all-carts-by-orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/orders/get-all-orders",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"orders",
+								"get-all-orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-order",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/orders/delete-order/{{order_id}}",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"orders",
+								"delete-order",
+								"{{order_id}}"
 							]
 						}
 					},

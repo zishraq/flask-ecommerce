@@ -149,9 +149,6 @@ def get_all_orders():
                 }
             )
 
-        # orders_categorised[]
-        # print(dict(i))
-
     response['isSuccess'] = True
     response['orders'] = orders_categorised
     return response

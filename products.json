@@ -1,0 +1,250 @@
+[
+    {
+        "product_name": "Gigabyte GT 710 2GB DDR3 Graphics Card",
+        "description": "2GB DDR3",
+        "product_category": "Graphics Card",
+        "price": 6190,
+        "discount": 2300,
+        "in_stock": 27
+    },
+	{
+        "product_name": "Asus Dual GeForce GTX 1650 OC Edition 4GB DDR5 Graphics Card",
+        "description": "OC Edition 4GB DDR5",
+        "product_category": "Graphics Card",
+        "price": 40000,
+        "discount": 3000,
+        "in_stock": 35
+    },
+	{
+        "product_name": "Zotac GeForce GT 710 2GB DDR3 Graphics Card",
+        "description": "2GB DDR3",
+        "product_category": "Graphics Card",
+        "price": 6400,
+        "discount": 100,
+        "in_stock": 19
+    },
+	{
+        "product_name": "Colorful GeForce GT730K 2GD3-V 2GB Graphics Card",
+        "description": "2GD3-V 2GB",
+        "product_category": "Graphics Card",
+        "price": 7500,
+        "discount": 300,
+        "in_stock": 25
+    },
+	{
+        "product_name": "GIGABYTE GeForce GT 730 2GB DDR3 PCI EXPRESS Graphics Card",
+        "description": "2GB DDR3 PCI EXPRESS",
+        "product_category": "Graphics Card",
+        "price": 7900,
+        "discount": 500,
+        "in_stock": 35
+    },
+	{
+        "product_name": "MSI GeForce GT 730 Kepler DDR3 2GB OC Low Profile Graphics Card",
+        "description": "DDR3 2GB OC Low Profile",
+        "product_category": "Graphics Card",
+        "price": 8900,
+        "discount": 300,
+        "in_stock": 32
+    },
+
+	{
+        "product_name": "ZOTAC GeForce GT 730 Zone Edition 4GB DDR3 Graphics Card",
+        "description": "Zone Edition 4GB",
+        "product_category": "Graphics Card",
+        "price": 11070,
+        "discount": 150,
+        "in_stock": 19
+    },
+	{
+        "product_name": "MSI GeForce GT 1030 2GD4 LP OC 2GB Graphics Card",
+        "description": "2GD4 LP OC 2GB",
+        "product_category": "Graphics Card",
+        "price": 11200,
+        "discount": 700,
+        "in_stock": 39
+    },
+	{
+        "product_name": "Gigabyte GeForce GTX 1050 TI OC Low Profile 4GB GDDR5 Graphics Card (1 Year Warranty)",
+        "description": "OC Low Profile 4GB GDDR5",
+        "product_category": "Graphics Card",
+        "price": 31500,
+        "discount": 1500,
+        "in_stock": 34
+    },
+	{
+        "product_name": "Palit GeForce GTX 1050 Ti StormX 4GB GDDR5 Graphics Card",
+        "description": "StormX 4GB GDDR5",
+        "product_category": "Graphics Card",
+        "price": 27000,
+        "discount": 0,
+        "in_stock": 32
+    },
+	{
+        "product_name": "Gigabyte GeForce GTX 1650 D6 OC 4GB Graphics Card",
+        "description": "D6 OC 4GB",
+        "product_category": "Graphics Card",
+        "price": 35000,
+        "discount": 2500,
+        "in_stock": 31
+    },
+	{
+        "product_name": "Zotac Gaming GeForce GTX 1650 OC 4GB GDDR6 Graphics Card",
+        "description": "OC 4GB GDDR6",
+        "product_category": "Graphics Card",
+        "price": 35000,
+        "discount": 1500,
+        "in_stock": 39
+    },
+	{
+        "product_name": "Palit GeForce GTX 1660 Ti DUAL 6GB GDDR6 Graphics Card",
+        "description": "6GB GDDR6",
+        "product_category": "Graphics Card",
+        "price": 55000,
+        "discount": 0,
+        "in_stock": 38
+    },
+	{
+        "product_name": "MSI GeForce GTX 1660 Super Ventus XS OC 6GB Graphics Card",
+        "description": "OC 6GB",
+        "product_category": "Graphics Card",
+        "price": 62000,
+        "discount": 3000,
+        "in_stock": 25
+    },
+	{
+        "product_name": "MSI Radeon RX 6600 XT MECH 2X 8G OCV1 GDDR6 Graphics Card",
+        "description": "8G OCV1 GDDR6",
+        "product_category": "Graphics Card",
+        "price": 70000,
+        "discount": 5000,
+        "in_stock": 18
+    },
+	{
+        "product_name": "ZOTAC GAMING GeForce RTX 3060 Ti Twin Edge OC LHR 8GB Graphics Card",
+        "description": "OC LHR 8GB",
+        "product_category": "Graphics Card",
+        "price": 97000,
+        "discount": 5000,
+        "in_stock": 19
+    },
+	{
+        "product_name": "GIGABYTE GeForce RTX 3060 Ti EAGLE 8GB Graphics Card",
+        "description": "8GB",
+        "product_category": "Graphics Card",
+        "price": 95480,
+        "discount": 5600,
+        "in_stock": 28
+    },
+	{
+        "product_name": "Sapphire PULSE AMD Radeon RX 6700 XT GAMING OC 12GB GDDR6 Graphics Card",
+        "description": "OC 12GB GDDR6",
+        "product_category": "Graphics Card",
+        "price": 95000,
+        "discount": 5000,
+        "in_stock": 29
+    },
+	{
+        "product_name": "Sapphire NITRO+ AMD Radeon RX 6700 XT Gaming OC 12GB GDDR6 Graphics Card",
+        "description": "OC 12GB GDDR6",
+        "product_category": "Graphics Card",
+        "price": 105000,
+        "discount": 10000,
+        "in_stock": 36
+    },
+	{
+        "product_name": "Palit GeForce RTX 3070 GamingPro 8GB GDDR6 Graphics Card",
+        "description": "8GB GDDR6",
+        "product_category": "Graphics Card",
+        "price": 102000,
+        "discount": 0,
+        "in_stock": 36
+    },
+	{
+        "product_name": "Sapphire NITRO PLUS AMD Radeon RX 6800 Gaming OC 16GB Graphics Card",
+        "description": "OC 16GB",
+        "product_category": "Graphics Card",
+        "price": 115000,
+        "discount": 5000,
+        "in_stock": 32
+    },
+	{
+        "product_name": "Sapphire PULSE AMD Radeon RX 6800 Gaming 16GB GDDR6 Graphics Card",
+        "description": "16GB GDDR6",
+        "price": 121000,
+        "discount": 10000,
+        "in_stock": 25
+    },
+	{
+        "product_name": "Gigabyte GeForce RTX 3070 Ti Gaming OC 8GB Graphics Card",
+        "description": "OC 8GB",
+        "product_category": "Graphics Card",
+        "price": 125860,
+        "discount": 5000,
+        "in_stock": 31
+    },
+	{
+        "product_name": "ZOTAC Gaming GeForce RTX 3070 Ti Trinity OC 8GB GDDR6X Graphics Card",
+        "description": "8GB GDDR6X",
+        "product_category": "Graphics Card",
+        "price": 130000,
+        "discount": 5000,
+        "in_stock": 25
+    },
+	{
+        "product_name": "Gigabyte Radeon RX 6900 XT GAMING OC 16GB GDDR6 Graphics Card",
+        "description": "OC 16GB GDDR6",
+        "product_category": "Graphics Card",
+        "price": 160000,
+        "discount": 5000,
+        "in_stock": 32
+    },
+	{
+        "product_name": "Asus TUF Gaming GeForce RTX 3080 Ti OC 12GB GDDR6X Graphics Card",
+        "description": "OC 12GB GDDR6X",
+        "product_category": "Graphics Card",
+        "price": 247500,
+        "discount": 20000,
+        "in_stock": 26
+    },
+	{
+        "product_name": "Gigabyte 8GB DDR4 2666MHz Heatsink Desktop Ram",
+        "description": "DDR4 2666MHz Heatsink",
+        "product_category": "Ram",
+        "price": 3800,
+        "discount": 300,
+        "in_stock": 32
+    },
+	{
+        "product_name": "Gigabyte AORUS RGB 16GB (2x8GB) DDR4 3333MHz Desktop Gaming RAM",
+        "description": "16GB (2x8GB) DDR4 3333MHz",
+        "product_category": "Ram",
+        "price": 11500,
+        "discount": 900,
+        "in_stock": 16
+    },
+	{
+        "product_name": "Gigabyte AORUS 8GB 3200MHz RGB RAM",
+        "description": "8GB 3200MHz",
+        "product_category": "Ram",
+        "price": 4540,
+        "discount": 300,
+        "in_stock": 28
+    },
+	{
+        "product_name": "Corsair VENGEANCE 16GB DDR5 4800MHz C40 RAM",
+        "description": "16GB DDR5 4800MHz",
+        "product_category": "Ram",
+        "price": 18700,
+        "discount": 1700,
+        "in_stock": 17
+    },
+	{
+        "product_name": "Corsair Dominator Platinum RGB 8GB 3200MHz DDR4 RAM (White)",
+        "description": "RGB 8GB 3200MHz DDR4",
+        "product_category": "Ram",
+        "price": 6980,
+        "discount": 600,
+        "in_stock": 32
+    }
+]
