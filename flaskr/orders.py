@@ -100,16 +100,23 @@ def make_order():
 @bp.route('/get-all-orders', methods=['GET'])
 @login_required
 def get_all_orders():
+    response = {
+        'isSuccess': False,
+        'message': 'Create an Order'
+    }
+
     username = g.user['username']
 
     db = get_db()
 
     orders = db.execute(
-        'SELECT * FROM order_info AS oi '
+        'SELECT oi.order_id, oi.created_at, oi.payment_method, oi.address, pbc.product_id, pbc.quantity, p.product_name, p.price FROM order_info AS oi '
         'JOIN product_by_cart AS pbc '
         'ON oi.order_id = pbc.cart_id '
         'JOIN shopping_cart_info AS sci '
         'ON pbc.cart_id = sci.cart_id '
+        'JOIN product AS p '
+        'ON p.product_id = pbc.product_id '
         'WHERE sci.username = ?',
         (username,)
     ).fetchall()
@@ -118,20 +125,33 @@ def get_all_orders():
 
     for i in orders:
         formatted_data = dict(i)
-        if formatted_data['order_id'] in orders_categorised:
+        if formatted_data['order_id'] not in orders_categorised:
             orders_categorised[formatted_data['order_id']] = {
-                'created_at': formatted_data['oi.created_at'],
-                'payment_method': formatted_data['oi.payment_method'],
-                'address': formatted_data['oi.address'],
+                'created_at': formatted_data['created_at'],
+                'payment_method': formatted_data['payment_method'],
+                'address': formatted_data['address'],
                 'products': [
                     {
                         'product_id': formatted_data['product_id'],
-                        'quantity': formatted_data['quantity'],
-
+                        'product_name': formatted_data['product_name'],
+                        'price': formatted_data['price'],
+                        'quantity': formatted_data['quantity']
                     }
                 ]
             }
+        else:
+            orders_categorised[formatted_data['order_id']]['products'].append(
+                {
+                    'product_id': formatted_data['product_id'],
+                    'product_name': formatted_data['product_name'],
+                    'price': formatted_data['price'],
+                    'quantity': formatted_data['quantity']
+                }
+            )
 
         # orders_categorised[]
         # print(dict(i))
 
+    response['isSuccess'] = True
+    response['orders'] = orders_categorised
+    return response
