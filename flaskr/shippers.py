@@ -1,8 +1,7 @@
 import uuid
 from datetime import datetime
 
-from flask import Blueprint, flash, g, redirect, render_template, request, url_for, jsonify
-from werkzeug.exceptions import abort
+from flask import Blueprint, g, request, jsonify
 
 from flaskr.auth import login_required, authorization_required
 from flaskr.db import get_db
