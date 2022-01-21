@@ -107,7 +107,7 @@ CREATE TABLE order_info (
     shipment_created_by TEXT,
     PRIMARY KEY(order_id),
     FOREIGN KEY (order_id) REFERENCES shopping_cart_info(cart_id),
-    FOREIGN KEY (order_id) REFERENCES shopping_cart_info(cart_id)
+    FOREIGN KEY (shipper_id) REFERENCES shipper(shipper_id)
 );
 
 CREATE INDEX product_name ON product(product_name);
