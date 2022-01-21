@@ -22,6 +22,22 @@ def add_product():
     db = get_db()
 
     body = dict(request.get_json())
+
+    if 'products' not in body:
+        response['error'] = 'products key not provided'
+        return response
+
+    else:
+        if type(body['products']) != list:
+            response['error'] = 'products key should be a list or array'
+            return response
+
+        for product in body['products']:
+            if 'product_name' not in product or 'description' not in product or 'product_category' not in product or 'price' not in product or 'discount' not in product or 'in_stock' not in product:
+                response['error'] = 'A key is missing.'
+                response['product_details'] = product
+                return response
+
     creation_data = {}
     creation_data['created_at'] = datetime.now()
     creation_data['created_by'] = g.user['username']
@@ -30,6 +46,17 @@ def add_product():
     for product in body['products']:
         product.update(creation_data)
         product['product_id'] = str(uuid.uuid4())
+
+        check_product = db.execute(
+            'SELECT product_name FROM product '
+            'WHERE product_name = ? '
+            'LIMIT 1',
+            (product['product_name'],)
+        ).fetchall()
+
+        if len(check_product) != 0:
+            response['error'] = f'Product {check_product[0]["product_name"]} already exists.'
+            return response
 
         try:
             db.execute(
@@ -254,6 +281,17 @@ def add_products_to_wishlist():
             pass
 
     response['isSuccess'] = True
+    return response
+
+
+@bp.route('/remove-product-from-wishlist', methods=['POST'])
+@login_required
+def remove_product_from_wishlist():
+    response = {
+        'isSuccess': False,
+        'operation': 'Remove product from wishlist'
+    }
+
     return response
 
 
