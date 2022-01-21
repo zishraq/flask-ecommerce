@@ -65,9 +65,27 @@ def register():
         return response
 
     try:
+        keys = ''
+        set_values = ''
+        values = []
+
+        for key in body:
+            keys += key + ', '
+            set_values += '?, '
+
+            if key == 'password':
+                values.append(generate_password_hash(key))
+            else:
+                values.append(body[key])
+
+        values.append('customer')
+        values.append(joined_at)
+        values = tuple(values)
+
+        query = f'INSERT INTO user ({keys}role, joined_at) VALUES ({set_values}?, ?)'
+
         db.execute(
-            'INSERT INTO user (username, password, role, joined_at) VALUES (?, ?, ?, ?)',
-            (username, generate_password_hash(password), 'customer', joined_at),
+            query, values
         )
 
         db.commit()

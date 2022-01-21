@@ -184,7 +184,6 @@ def update_product(product_id):
 
     for key in update_body:
         if key not in ['product_name', 'description', 'product_category', 'price', 'discount', 'in_stock', 'tags']:
-            print(key)
             response['error'] = 'Wrong key provided.'
             return response
 
