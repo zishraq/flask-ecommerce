@@ -23,6 +23,8 @@ def add_product():
 
     body = dict(request.get_json())
 
+    product_names = []
+
     if 'products' not in body:
         response['error'] = 'products key not provided'
         return response
@@ -33,6 +35,14 @@ def add_product():
             return response
 
         for product in body['products']:
+            product_existence_check = product['product_name'] + product['description']
+
+            if product_existence_check not in product_names:
+                product_names.append(product_existence_check)
+            else:
+                response['error'] = f'Product {product["product_name"]} appeared more than once in the body.'
+                return response
+
             if 'product_name' not in product or 'description' not in product or 'product_category' not in product or 'price' not in product or 'discount' not in product or 'in_stock' not in product:
                 response['error'] = 'A key is missing.'
                 response['product_details'] = product
@@ -47,15 +57,22 @@ def add_product():
         product.update(creation_data)
         product['product_id'] = str(uuid.uuid4())
 
-        check_product = db.execute(
+        check_product_name = db.execute(
             'SELECT product_name FROM product '
             'WHERE product_name = ? '
             'LIMIT 1',
             (product['product_name'],)
         ).fetchall()
 
-        if len(check_product) != 0:
-            response['error'] = f'Product {check_product[0]["product_name"]} already exists.'
+        check_product_description = db.execute(
+            'SELECT description FROM product '
+            'WHERE description = ? '
+            'LIMIT 1',
+            (product['description'],)
+        ).fetchall()
+
+        if len(check_product_name) != 0 and len(check_product_description) != 0:
+            response['error'] = f'Product {check_product_name[0]["product_name"]} already exists.'
             return response
 
         try:
