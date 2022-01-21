@@ -1,3 +1,4 @@
+from datetime import datetime
 import functools
 
 from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
@@ -51,6 +52,7 @@ def register():
 
     username = body['username']
     password = body['password']
+    joined_at = datetime.now()
 
     db = get_db()
 
@@ -63,14 +65,9 @@ def register():
         return response
 
     try:
-        # db.execute(
-        #     'INSERT INTO user (username, password) VALUES (?, ?)',
-        #     (username, generate_password_hash(password)),
-        # )
-
         db.execute(
-            'INSERT INTO user (username, password, role) VALUES (?, ?, ?)',
-            (username, generate_password_hash(password), 'customer'),
+            'INSERT INTO user (username, password, role, joined_at) VALUES (?, ?, ?, ?)',
+            (username, generate_password_hash(password), 'customer', joined_at),
         )
 
         db.commit()

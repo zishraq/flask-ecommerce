@@ -3,7 +3,7 @@ from datetime import datetime
 
 from flask import Blueprint, g, request
 
-from flaskr.auth import login_required
+from flaskr.auth import login_required, authorization_required
 from flaskr.db import get_db
 
 bp = Blueprint('orders', __name__, url_prefix='/orders')
@@ -145,6 +145,75 @@ def get_all_orders():
                 'created_at': formatted_data['created_at'],
                 'payment_method': formatted_data['payment_method'],
                 'address': formatted_data['address'],
+                'products': [
+                    {
+                        'product_id': formatted_data['product_id'],
+                        'product_name': formatted_data['product_name'],
+                        'price': formatted_data['price'],
+                        'quantity': formatted_data['quantity']
+                    }
+                ]
+            }
+        else:
+            orders_categorised[formatted_data['order_id']]['products'].append(
+                {
+                    'product_id': formatted_data['product_id'],
+                    'product_name': formatted_data['product_name'],
+                    'price': formatted_data['price'],
+                    'quantity': formatted_data['quantity']
+                }
+            )
+
+    response['isSuccess'] = True
+    response['total_money_spent'] = total_money_spent
+    response['orders'] = orders_categorised
+    return response
+
+
+@bp.route('/get-all-customers-orders', methods=['GET'])
+@authorization_required
+@login_required
+def get_all_customers_orders():
+    response = {
+        'isSuccess': False,
+        'message': 'Create an Order'
+    }
+
+    db = get_db()
+
+    get_total_money_spent = db.execute(
+        'SELECT SUM((p.price - p.discount) * pbc.quantity) AS product_total_price FROM order_info AS oi '
+        'JOIN product_by_cart AS pbc '
+        'ON oi.order_id = pbc.cart_id '
+        'JOIN shopping_cart_info AS sci '
+        'ON pbc.cart_id = sci.cart_id '
+        'JOIN product AS p '
+        'ON p.product_id = pbc.product_id '
+    ).fetchall()
+
+    total_money_spent = get_total_money_spent[0]['product_total_price']
+
+    orders = db.execute(
+        'SELECT oi.order_id, oi.created_at, oi.payment_method, oi.address, pbc.product_id, pbc.quantity, p.product_name, p.price, sci.username FROM order_info AS oi '
+        'JOIN product_by_cart AS pbc '
+        'ON oi.order_id = pbc.cart_id '
+        'JOIN shopping_cart_info AS sci '
+        'ON pbc.cart_id = sci.cart_id '
+        'JOIN product AS p '
+        'ON p.product_id = pbc.product_id '
+    ).fetchall()
+
+    orders_categorised = {}
+
+    for i in orders:
+        formatted_data = dict(i)
+
+        if formatted_data['order_id'] not in orders_categorised:
+            orders_categorised[formatted_data['order_id']] = {
+                'created_at': formatted_data['created_at'],
+                'payment_method': formatted_data['payment_method'],
+                'address': formatted_data['address'],
+                'username': formatted_data['username'],
                 'products': [
                     {
                         'product_id': formatted_data['product_id'],

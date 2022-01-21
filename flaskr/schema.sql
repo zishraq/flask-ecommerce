@@ -110,4 +110,7 @@ CREATE TABLE order_info (
     FOREIGN KEY (order_id) REFERENCES shopping_cart_info(cart_id)
 );
 
+CREATE INDEX product_name ON product(product_name);
+CREATE INDEX description ON product(description);
+
 INSERT INTO user (username, password, role) VALUES ('admin', 'admin', 'admin');

@@ -146,6 +146,20 @@ def delete_product(product_id):
     db.commit()
 
     db.execute(
+        'DELETE FROM product_wishlist '
+        'WHERE product_id = ?',
+        (product_id,)
+    )
+    db.commit()
+
+    db.execute(
+        'DELETE FROM product_by_tags '
+        'WHERE product_id = ?',
+        (product_id,)
+    )
+    db.commit()
+
+    db.execute(
         'DELETE FROM product '
         'WHERE product_id = ?',
         (product_id,)
@@ -167,6 +181,34 @@ def update_product(product_id):
 
     db = get_db()
 
+    update_body = dict(request.get_json())
+
+    for key in update_body:
+        if key not in ['product_name', 'description', 'product_category', 'price', 'discount', 'in_stock', 'tags']:
+            print(key)
+            response['error'] = 'Wrong key provided.'
+            return response
+
+        if key in ['product_name', 'description', 'product_category']:
+            if type(update_body[key]) != str:
+                response['error'] = f'Wrong type for {key}.'
+                return response
+
+        if key in ['price', 'discount']:
+            if type(update_body[key]) not in [int, float]:
+                response['error'] = f'Wrong type for {key}.'
+                return response
+
+        if key == 'in_stock':
+            if type(update_body[key]) != int:
+                response['error'] = 'Wrong type for product_name.'
+                return response
+
+        if key == 'tags':
+            if type(update_body[key]) != list:
+                response['error'] = 'Wrong type for tags.'
+                return response
+
     body = db.execute(
         'SELECT * FROM product '
         'WHERE product_id = ? '
@@ -185,8 +227,15 @@ def update_product(product_id):
     )
     db.commit()
 
+    db.execute(
+        'DELETE FROM product_by_tag '
+        'WHERE product_id = ?',
+        (product_id,)
+    )
+    db.commit()
+
     body = dict(body[0])
-    update_body = dict(request.get_json())
+
     update_data = {}
     update_data['updated_at'] = datetime.now()
     update_data['updated_by'] = g.user['username']
@@ -217,6 +266,30 @@ def update_product(product_id):
         response['error'] = f'Product {body["product_name"]} already exists.'
         return response
 
+    if 'tags' in update_body:
+        for tag in update_body['tags']:
+            try:
+                db.execute(
+                    f'INSERT INTO product_tags (tag_name, created_at, created_by) VALUES (?, ?, ?)',
+                    (
+                        tag,
+                        update_data['updated_at'],
+                        update_data['updated_by']
+                    ),
+                )
+                db.commit()
+            except db.IntegrityError:
+                pass
+
+            db.execute(
+                f'INSERT INTO product_by_tag (tag_name, product_id) VALUES (?, ?)',
+                (
+                    tag,
+                    product_id,
+                ),
+            )
+            db.commit()
+
     response['updated_products'] = body
     return response
 
@@ -239,18 +312,34 @@ def all_products():
     if user_role == 'admin':
         products = db.execute(
             'SELECT * FROM product '
-            'ORDER BY total_sold DESC'
+            'ORDER BY created_at ASC'
         ).fetchall()
+
     else:
         products = db.execute(
             'SELECT product_id, product_name, description, product_category, price, discount FROM product '
+            'WHERE in_stock > 0 '
             'ORDER BY total_sold DESC'
         ).fetchall()
 
     results = []
 
     for i in products:
-        results.append(dict(i))
+        formatted_data = dict(i)
+
+        get_product_tags = db.execute(
+            'SELECT tag_name FROM product_by_tag '
+            'WHERE product_id = ?',
+            (formatted_data['product_id'],)
+        ).fetchall()
+
+        if user_role == 'admin':
+            formatted_data['tags'] = []
+
+            for tag in get_product_tags:
+                formatted_data['tags'].append(dict(tag)['tag_name'])
+
+        results.append(formatted_data)
 
     return jsonify({
         'isSuccess': True,
