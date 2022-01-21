@@ -347,6 +347,87 @@ def all_products():
     })
 
 
+@bp.route('/product-details/<product_id>', methods=['GET'])
+@login_required
+def product_details(product_id):
+    response = {
+        'isSuccess': False,
+        'operation': 'Get product details'
+    }
+
+    db = get_db()
+
+    username = g.user['username']
+
+    get_role = db.execute(
+        'SELECT role FROM user '
+        'WHERE username = ?',
+        (username,)
+    ).fetchall()
+
+    user_role = dict(get_role[0])['role']
+
+    if user_role == 'admin':
+        products = db.execute(
+            'SELECT * FROM product '
+            'WHERE product_id = ? '
+            'LIMIT 1',
+            (product_id,)
+        ).fetchall()
+
+    else:
+        products = db.execute(
+            'SELECT product_id, product_name, description, product_category, price, discount FROM product '
+            'WHERE product_id = ? AND in_stock > 0 '
+            'LIMIT 1',
+            (product_id,)
+        ).fetchall()
+
+    if len(products) == 0:
+        response['error'] = f'No such product with the id = {product_id}'
+        return response
+
+    result = dict(products[0])
+
+    if user_role == 'admin':
+        get_product_tags = db.execute(
+            'SELECT tag_name FROM product_by_tag '
+            'WHERE product_id = ?',
+            (product_id,)
+        ).fetchall()
+
+        get_orders = db.execute(
+            'SELECT oi.order_id, pbc.quantity, sci.username FROM order_info AS oi '
+            'JOIN product_by_cart AS pbc '
+            'ON oi.order_id = pbc.cart_id '
+            'JOIN shopping_cart_info AS sci '
+            'ON pbc.cart_id = sci.cart_id '
+            'WHERE pbc.product_id = ?',
+            (product_id,)
+        ).fetchall()
+
+        result['tags'] = []
+        result['orders'] = []
+
+        for tag in get_product_tags:
+            result['tags'].append(dict(tag)['tag_name'])
+
+        for order in get_orders:
+            result['orders'].append(
+                {
+                    dict(order)['order_id']: {
+                        'username': dict(order)['username'],
+                        'quantity': dict(order)['quantity']
+                    }
+                }
+            )
+
+    return jsonify({
+        'isSuccess': True,
+        'product': result
+    })
+
+
 @bp.route('/add-products-to-wishlist', methods=['POST'])
 @login_required
 def add_products_to_wishlist():
