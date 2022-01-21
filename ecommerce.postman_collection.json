@@ -97,7 +97,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"ishraq\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -510,12 +510,12 @@
 					"response": []
 				},
 				{
-					"name": "search-products",
+					"name": "product-details",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/products/search-products?q=keyboard",
+							"raw": "http://127.0.0.1:5000/products/product-details/{{product_id}}",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -526,36 +526,8 @@
 							"port": "5000",
 							"path": [
 								"products",
-								"search-products"
-							],
-							"query": [
-								{
-									"key": "q",
-									"value": "keyboard"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "wishlist-products",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:5000/products/wishlist-products",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "5000",
-							"path": [
-								"products",
-								"wishlist-products"
+								"product-details",
+								"{{product_id}}"
 							]
 						}
 					},
@@ -613,6 +585,35 @@
 								"products",
 								"delete-product",
 								"{{product_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search-products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/products/search-products?q=keyboard",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"products",
+								"search-products"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "keyboard"
+								}
 							]
 						}
 					},
@@ -678,6 +679,29 @@
 								"products",
 								"remove-product-from-wishlist",
 								"{{product_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "wishlist-products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/products/wishlist-products",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"products",
+								"wishlist-products"
 							]
 						}
 					},
