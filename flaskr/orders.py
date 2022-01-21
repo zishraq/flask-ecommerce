@@ -109,6 +109,20 @@ def get_all_orders():
 
     db = get_db()
 
+    get_total_money_spent = db.execute(
+        'SELECT SUM((p.price - p.discount) * pbc.quantity) AS product_total_price FROM order_info AS oi '
+        'JOIN product_by_cart AS pbc '
+        'ON oi.order_id = pbc.cart_id '
+        'JOIN shopping_cart_info AS sci '
+        'ON pbc.cart_id = sci.cart_id '
+        'JOIN product AS p '
+        'ON p.product_id = pbc.product_id '
+        'WHERE sci.username = ?',
+        (username,)
+    ).fetchall()
+
+    total_money_spent = get_total_money_spent[0]['product_total_price']
+
     orders = db.execute(
         'SELECT oi.order_id, oi.created_at, oi.payment_method, oi.address, pbc.product_id, pbc.quantity, p.product_name, p.price FROM order_info AS oi '
         'JOIN product_by_cart AS pbc '
@@ -125,6 +139,7 @@ def get_all_orders():
 
     for i in orders:
         formatted_data = dict(i)
+
         if formatted_data['order_id'] not in orders_categorised:
             orders_categorised[formatted_data['order_id']] = {
                 'created_at': formatted_data['created_at'],
@@ -150,5 +165,6 @@ def get_all_orders():
             )
 
     response['isSuccess'] = True
+    response['total_money_spent'] = total_money_spent
     response['orders'] = orders_categorised
     return response

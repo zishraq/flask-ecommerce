@@ -53,28 +53,29 @@ def add_product():
             response['message'] = f'Product {product["product_name"]} already exists.'
             pass
 
-        for tag in product['tags']:
-            try:
+        if 'tags' in product:
+            for tag in product['tags']:
+                try:
+                    db.execute(
+                        f'INSERT INTO product_tags (tag_name, created_at, created_by) VALUES (?, ?, ?)',
+                        (
+                            tag,
+                            creation_data['created_at'],
+                            creation_data['created_by']
+                        ),
+                    )
+                    db.commit()
+                except db.IntegrityError:
+                    pass
+
                 db.execute(
-                    f'INSERT INTO product_tags (tag_name, created_at, created_by) VALUES (?, ?, ?)',
+                    f'INSERT INTO product_by_tag (tag_name, product_id) VALUES (?, ?)',
                     (
                         tag,
-                        creation_data['created_at'],
-                        creation_data['created_by']
+                        product['product_id'],
                     ),
                 )
                 db.commit()
-            except db.IntegrityError:
-                pass
-
-            db.execute(
-                f'INSERT INTO product_by_tag (tag_name, product_id) VALUES (?, ?)',
-                (
-                    tag,
-                    product['product_id'],
-                ),
-            )
-            db.commit()
 
     response['total_inserted_products'] = len(body['products'])
     response['inserted_products'] = body['products']
@@ -177,6 +178,7 @@ def update_product(product_id):
 
 
 @bp.route('/all-products', methods=['GET'])
+@login_required
 def all_products():
     db = get_db()
 
@@ -214,6 +216,7 @@ def all_products():
 
 
 @bp.route('/add-products-to-wishlist', methods=['POST'])
+@login_required
 def add_products_to_wishlist():
     response = {
         'isSuccess': False,
@@ -244,6 +247,7 @@ def add_products_to_wishlist():
 
 
 @bp.route('/wishlist-products', methods=['GET'])
+@login_required
 def wishlist_products():
     db = get_db()
     username = g.user['username']
@@ -253,6 +257,74 @@ def wishlist_products():
         'WHERE product_id IN (SELECT DISTINCT product_id FROM product_wishlist WHERE username = ?)',
         (username,)
     ).fetchall()
+
+    results = []
+
+    for i in products:
+        results.append(dict(i))
+
+    return jsonify({
+        'isSuccess': True,
+        'total_products': len(results),
+        'products': results
+    })
+
+
+@bp.route('/search-products', methods=['GET'])
+@login_required
+def search_products():
+    db = get_db()
+
+    username = g.user['username']
+
+    search_term = request.args.get('q')
+
+    if ' ' in search_term:
+        search_term_formatted = search_term.replace(' ', '%')
+        search_term_formatted = f'%{search_term_formatted}%'
+        print(search_term_formatted)
+
+    else:
+        search_term = search_term[1 : len(search_term) - 1]
+        search_term_formatted = f'%{search_term}%'
+
+    get_role = db.execute(
+        'SELECT role FROM user '
+        'WHERE username = ?',
+        (username,)
+    ).fetchall()
+
+    user_role = dict(get_role[0])['role']
+
+    if user_role == 'admin':
+        products_query = f'''
+            SELECT * FROM product 
+            WHERE LOWER(product_name) LIKE ? OR LOWER(description) LIKE ? OR LOWER(product_category) LIKE ? OR 
+            product_id IN ( 
+               SELECT product_id FROM product_by_tag WHERE tag_name LIKE ? 
+           )
+        '''
+
+        print(products_query)
+
+        products = db.execute(
+            products_query, (search_term_formatted, search_term_formatted, search_term_formatted, search_term_formatted)
+        ).fetchall()
+
+    else:
+        products_query = f'''
+            SELECT product_id, product_name, description, product_category, price, discount FROM product 
+            WHERE LOWER(product_name) LIKE ? OR LOWER(description) LIKE ? OR LOWER(product_category) LIKE ? OR 
+            product_id IN ( 
+               SELECT product_id FROM product_by_tag WHERE tag_name LIKE ? 
+           )
+        '''
+
+        print(products_query)
+
+        products = db.execute(
+            products_query, (search_term_formatted, search_term_formatted, search_term_formatted, search_term_formatted)
+        ).fetchall()
 
     results = []
 

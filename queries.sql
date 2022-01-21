@@ -15,11 +15,34 @@
 -- WHERE pbc.cart_id = 'a59a9625-a108-4c0d-b180-00b5d28798ba';
 
 
-SELECT * FROM order_info AS oi
-JOIN product_by_cart AS pbc
-ON oi.order_id = pbc.cart_id
-JOIN shopping_cart_info AS sci
-ON pbc.cart_id = sci.cart_id
-JOIN product AS p
-ON p.product_id = pbc.product_id
-WHERE sci.username = 'tanvir';
+-- SELECT * FROM order_info AS oi
+-- JOIN product_by_cart AS pbc
+-- ON oi.order_id = pbc.cart_id
+-- JOIN shopping_cart_info AS sci
+-- ON pbc.cart_id = sci.cart_id
+-- JOIN product AS p
+-- ON p.product_id = pbc.product_id
+-- WHERE sci.username = 'tanvir';
+
+
+-- SELECT oi.order_id, oi.created_at, oi.payment_method, oi.address, pbc.product_id, pbc.quantity, p.product_name, p.price, SUM((p.price - p.discount) * pbc.quantity) AS product_total_price FROM order_info AS oi
+-- JOIN product_by_cart AS pbc
+-- ON oi.order_id = pbc.cart_id
+-- JOIN shopping_cart_info AS sci
+-- ON pbc.cart_id = sci.cart_id
+-- JOIN product AS p
+-- ON p.product_id = pbc.product_id
+-- WHERE sci.username = 'tanvir'
+
+
+-- SELECT * FROM product
+-- WHERE LOWER(product_name) LIKE '%keyboard%' OR LOWER(description) LIKE '%keyboard%' OR LOWER(product_category) LIKE '%keyboard%' OR
+-- product_id IN (
+--     SELECT product_id FROM product_by_tag WHERE tag_name LIKE '%keyboard%'
+-- );
+
+SELECT * FROM product
+WHERE LOWER(product_name) = fr OR LOWER(description) LIKE '%keyboard%' OR LOWER(product_category) LIKE '%keyboard%' OR
+product_id IN (
+    SELECT product_id FROM product_by_tag WHERE tag_name LIKE '%keyboard%'
+);

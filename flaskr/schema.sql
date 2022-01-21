@@ -20,8 +20,8 @@ CREATE TABLE user (
   username TEXT PRIMARY KEY,
   password TEXT NOT NULL,
   name TEXT,
-  email TEXT,
-  phone TEXT,
+  email TEXT UNIQUE,
+  phone TEXT UNIQUE,
   role TEXT,
   address TEXT,
   joined_at TIMESTAMP

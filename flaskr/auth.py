@@ -81,6 +81,7 @@ def register():
     response['isSuccess'] = True
     return response
 
+
 @bp.route('/grant-admin-permission', methods=['POST'])
 @login_required
 @authorization_required

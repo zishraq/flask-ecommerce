@@ -96,6 +96,8 @@ def create_shipment():
 
 
 @bp.route('/all-shippers', methods=['GET'])
+@login_required
+@authorization_required
 def all_shippers():
     db = get_db()
     shippers = db.execute(
