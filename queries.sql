@@ -41,8 +41,5 @@
 --     SELECT product_id FROM product_by_tag WHERE tag_name LIKE '%keyboard%'
 -- );
 
-SELECT * FROM product
-WHERE LOWER(product_name) = fr OR LOWER(description) LIKE '%keyboard%' OR LOWER(product_category) LIKE '%keyboard%' OR
-product_id IN (
-    SELECT product_id FROM product_by_tag WHERE tag_name LIKE '%keyboard%'
-);
+SELECT product.product_id, product.product_name, product.description, product.product_category, product.price, product.discount FROM product
+WHERE product.product_id IN (SELECT DISTINCT product_wishlist.product_id FROM product_wishlist WHERE product_wishlist.username = 'admin');

@@ -229,6 +229,17 @@ def add_products_to_wishlist():
     username = g.user['username']
 
     for product_id in body['product_ids']:
+        check_product = db.execute(
+            'SELECT product_id FROM product '
+            'WHERE product_id = ? '
+            'LIMIT 1',
+            (product_id,)
+        ).fetchall()
+
+        if len(check_product) == 0:
+            response['error'] = f'No such product with the id = {product_id}'
+            return response
+
         try:
             db.execute(
                 f'INSERT INTO product_wishlist (username, product_id) VALUES (?, ?)',
@@ -285,7 +296,7 @@ def search_products():
         print(search_term_formatted)
 
     else:
-        search_term = search_term[1 : len(search_term) - 1]
+        search_term = search_term[1: len(search_term) - 1]
         search_term_formatted = f'%{search_term}%'
 
     get_role = db.execute(
