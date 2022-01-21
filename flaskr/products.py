@@ -301,14 +301,37 @@ def add_products_to_wishlist():
     return response
 
 
-@bp.route('/remove-product-from-wishlist', methods=['POST'])
+@bp.route('/remove-product-from-wishlist/<product_id>', methods=['POST'])
 @login_required
-def remove_product_from_wishlist():
+def remove_product_from_wishlist(product_id):
     response = {
         'isSuccess': False,
         'operation': 'Remove product from wishlist'
     }
 
+    db = get_db()
+    username = g.user['username']
+
+    check_wishlist = db.execute(
+        'SELECT * FROM product_wishlist '
+        'WHERE username = ? AND product_id = ? '
+        'ORDER BY created_at DESC '
+        'LIMIT 1',
+        (username, product_id)
+    ).fetchall()
+
+    if len(check_wishlist) == 0:
+        response['error'] = 'No such product in the wishlist'
+        return response
+
+    db.execute(
+        'DELETE FROM product_wishlist '
+        'WHERE username = ? AND product_id = ?',
+        (username, product_id)
+    )
+    db.commit()
+
+    response['isSuccess'] = True
     return response
 
 
