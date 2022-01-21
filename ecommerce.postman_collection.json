@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"zaheen\",\r\n    \"password\": \"123\",\r\n    \"role\": \"customer\"\r\n}",
+							"raw": "{\r\n    \"username\": \"zaheen\",\r\n    \"password\": \"123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -38,170 +38,7 @@
 							]
 						}
 					},
-					"response": [
-						{
-							"name": "register",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"tanvir\",\r\n    \"password\": \"12345\",\r\n    \"role\": \"customer\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://127.0.0.1:5000/auth/register",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "5000",
-									"path": [
-										"auth",
-										"register"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Content-Length",
-									"value": "52"
-								},
-								{
-									"key": "Server",
-									"value": "Werkzeug/2.0.2 Python/3.9.5"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 11 Jan 2022 09:08:24 GMT"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"isSuccess\": true,\n    \"operation\": \"Register\"\n}"
-						},
-						{
-							"name": "register",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\",\r\n    \"role\": \"admin\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://127.0.0.1:5000/auth/register",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "5000",
-									"path": [
-										"auth",
-										"register"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Content-Length",
-									"value": "52"
-								},
-								{
-									"key": "Server",
-									"value": "Werkzeug/2.0.2 Python/3.9.5"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 11 Jan 2022 09:09:04 GMT"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"isSuccess\": true,\n    \"operation\": \"Register\"\n}"
-						},
-						{
-							"name": "register",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"marcus_aurelius\",\r\n    \"password\": \"12345\",\r\n    \"role\": \"customer\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://127.0.0.1:5000/auth/register",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "5000",
-									"path": [
-										"auth",
-										"register"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Content-Length",
-									"value": "52"
-								},
-								{
-									"key": "Server",
-									"value": "Werkzeug/2.0.2 Python/3.9.5"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 11 Jan 2022 09:09:42 GMT"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"isSuccess\": true,\n    \"operation\": \"Register\"\n}"
-						}
-					]
+					"response": []
 				},
 				{
 					"name": "login",
@@ -267,6 +104,70 @@
 							"path": [
 								"auth",
 								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-account",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/auth/delete-account",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"delete-account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "grant-admin-permission",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usernames\": [\r\n        \"tanvir\",\r\n        \"maisha\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/auth/grant-admin-permission",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"auth",
+								"grant-admin-permission"
 							]
 						}
 					},
