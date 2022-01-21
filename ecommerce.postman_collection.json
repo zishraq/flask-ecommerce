@@ -97,7 +97,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+							"raw": "{\r\n    \"username\": \"ishraq\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -120,7 +120,70 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"ishraq\",\r\n    \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:5000/auth/login",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "Vary",
+									"value": "Cookie"
+								},
+								{
+									"key": "Set-Cookie",
+									"value": "session=eyJ1c2VybmFtZSI6ImlzaHJhcSJ9.YesJ5w.eavEvLI77ZXHvlsdpnv9yNy6BCQ; HttpOnly; Path=/"
+								},
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.0.2 Python/3.9.5"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Jan 2022 19:30:47 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"operation\": \"Log In\"\n}"
+						}
+					]
 				},
 				{
 					"name": "logout",
@@ -505,7 +568,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"product_name\": \"test book 2 updated\",\r\n    \"description\": \"test description 2 updated\",\r\n    \"product_category\": \"book\",\r\n    \"price\": 51.20,\r\n    \"discount\": 15.50\r\n}",
+							"raw": "{\r\n    \"product_name\": \"test book 2 updated\",\r\n    \"description\": \"test description 2 updated\",\r\n    \"product_category\": \"book\",\r\n    \"price\": 51.20,\r\n    \"discount\": 15.50,\r\n    \"tags\": [\r\n        \"test\",\r\n        \"book\"\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -562,7 +625,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"product_ids\": [\r\n        \"9b5fbd2f-fcbd-4483-8ec7-5710f69eedfe\",\r\n        \"bf02a800-1a35-47f1-803a-c9bf49efe841\"\r\n    ]\r\n}",
+							"raw": "{\r\n    \"product_ids\": [\r\n        \"207e0de4-1ba8-4ca6-be70-b94caf789c03\",\r\n        \"b840d02e-2adf-47c0-a17d-8acfe9685d32\"\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -632,7 +695,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"product_id\": \"0e7eb0f3-c77f-4e18-aa82-760c2b8952b4\",\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"product_id\": \"cf2c797a-5487-4b6a-b561-5dcd2e77f46f\",\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"product_id\": \"76523802-244d-4a60-a5d5-32f7c7e989fe\",\r\n            \"quantity\": 30\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -888,6 +951,29 @@
 							"path": [
 								"orders",
 								"get-all-orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-all-customers-orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:5000/orders/get-all-customers-orders",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"orders",
+								"get-all-customers-orders"
 							]
 						}
 					},
