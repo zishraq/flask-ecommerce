@@ -72,18 +72,18 @@ def make_order():
 
     body_details = request.get_json()
 
-    if 'payment_method' not in body_details or 'address' not in body_details:
-        response['error'] = 'Body key missing. payment_method or address.'
+    if 'payment_method' not in body_details or 'delivery_address' not in body_details:
+        response['error'] = 'Body key missing. payment_method or delivery_address.'
         return response
 
     try:
         db.execute(
-            f'INSERT INTO order_info(order_id, created_at, payment_method, address) VALUES (?, ?, ?, ?)',
+            f'INSERT INTO order_info(order_id, created_at, payment_method, delivery_address) VALUES (?, ?, ?, ?)',
             (
                 order_id,
                 created_at,
                 body_details['payment_method'],
-                body_details['address']
+                body_details['delivery_address']
             )
         )
         db.commit()
@@ -124,7 +124,7 @@ def get_all_orders():
     total_money_spent = get_total_money_spent[0]['product_total_price']
 
     orders = db.execute(
-        'SELECT oi.order_id, oi.created_at, oi.payment_method, oi.address, pbc.product_id, pbc.quantity, p.product_name, p.price FROM order_info AS oi '
+        'SELECT oi.order_id, oi.created_at, oi.payment_method, oi.delivery_address, pbc.product_id, pbc.quantity, p.product_name, p.price FROM order_info AS oi '
         'JOIN product_by_cart AS pbc '
         'ON oi.order_id = pbc.cart_id '
         'JOIN shopping_cart_info AS sci '
@@ -144,7 +144,7 @@ def get_all_orders():
             orders_categorised[formatted_data['order_id']] = {
                 'created_at': formatted_data['created_at'],
                 'payment_method': formatted_data['payment_method'],
-                'address': formatted_data['address'],
+                'delivery_address': formatted_data['delivery_address'],
                 'products': [
                     {
                         'product_id': formatted_data['product_id'],
@@ -194,7 +194,7 @@ def get_all_customers_orders():
     total_money_spent = get_total_money_spent[0]['product_total_price']
 
     orders = db.execute(
-        'SELECT oi.order_id, oi.created_at, oi.payment_method, oi.address, pbc.product_id, pbc.quantity, p.product_name, p.price, sci.username FROM order_info AS oi '
+        'SELECT oi.order_id, oi.created_at, oi.payment_method, oi.delivery_address, pbc.product_id, pbc.quantity, p.product_name, p.price, sci.username FROM order_info AS oi '
         'JOIN product_by_cart AS pbc '
         'ON oi.order_id = pbc.cart_id '
         'JOIN shopping_cart_info AS sci '
@@ -212,7 +212,7 @@ def get_all_customers_orders():
             orders_categorised[formatted_data['order_id']] = {
                 'created_at': formatted_data['created_at'],
                 'payment_method': formatted_data['payment_method'],
-                'address': formatted_data['address'],
+                'delivery_address': formatted_data['delivery_address'],
                 'username': formatted_data['username'],
                 'products': [
                     {

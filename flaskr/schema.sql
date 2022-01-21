@@ -101,7 +101,7 @@ CREATE TABLE order_info (
     order_id TEXT,
     created_at TIMESTAMP,
     payment_method TEXT,
-    address TEXT,
+    delivery_address TEXT,
     shipper_id TEXT,
     date_shipped TIMESTAMP,
     shipment_created_by TEXT,

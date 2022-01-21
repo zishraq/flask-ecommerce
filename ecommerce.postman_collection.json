@@ -695,7 +695,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"product_id\": \"76523802-244d-4a60-a5d5-32f7c7e989fe\",\r\n            \"quantity\": 30\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"product_id\": \"35c49731-f16a-4fc1-a85b-cda90bdeea34\",\r\n            \"quantity\": 30\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -849,7 +849,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"payment_method\": \"credit_card\",\r\n    \"address\": \"Banasree\"\r\n}",
+							"raw": "{\r\n    \"payment_method\": \"credit_card\",\r\n    \"delivery_address\": \"Banasree\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
