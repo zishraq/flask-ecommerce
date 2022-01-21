@@ -109,3 +109,5 @@ CREATE TABLE order_info (
     FOREIGN KEY (order_id) REFERENCES shopping_cart_info(cart_id),
     FOREIGN KEY (order_id) REFERENCES shopping_cart_info(cart_id)
 );
+
+INSERT INTO user (username, password, role) VALUES ('admin', 'admin', 'admin');
