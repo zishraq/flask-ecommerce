@@ -152,7 +152,7 @@ def delete_product(product_id):
     db.commit()
 
     db.execute(
-        'DELETE FROM product_by_tags '
+        'DELETE FROM product_by_tag '
         'WHERE product_id = ?',
         (product_id,)
     )
