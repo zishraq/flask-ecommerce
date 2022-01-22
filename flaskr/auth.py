@@ -74,7 +74,7 @@ def register():
             set_values += '?, '
 
             if key == 'password':
-                values.append(generate_password_hash(key))
+                values.append(generate_password_hash(body[key]))
             else:
                 values.append(body[key])
 

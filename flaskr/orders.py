@@ -101,7 +101,7 @@ def make_order():
 def get_all_orders():
     response = {
         'isSuccess': False,
-        'message': 'Create an Order'
+        'message': 'Get all Order'
     }
 
     username = g.user['username']
@@ -175,7 +175,7 @@ def get_all_orders():
 def get_all_customers_orders():
     response = {
         'isSuccess': False,
-        'message': 'Create an Order'
+        'message': 'Get all Order'
     }
 
     db = get_db()
