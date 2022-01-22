@@ -233,6 +233,6 @@ def get_all_customers_orders():
             )
 
     response['isSuccess'] = True
-    response['total_money_spent'] = total_money_spent
+    response['total_purchase_made'] = total_money_spent
     response['orders'] = orders_categorised
     return response
