@@ -289,6 +289,7 @@ def update_product(product_id):
             db.commit()
 
     response['updated_products'] = body
+    response['isSuccess'] = True
     return response
 
 
